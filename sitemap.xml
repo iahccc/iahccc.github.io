@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://iahc.gitee.io/blog/2020/08/28/hello-world/</loc>
+    <loc>https://iahccc.github.io/2020/08/28/hello-world/</loc>
     
     <lastmod>2020-08-28</lastmod>
     
   </url>
   
   <url>
-    <loc>https://iahc.gitee.io/blog/2020/08/27/testpage/</loc>
+    <loc>https://iahccc.github.io/2020/08/27/testpage/</loc>
     
     <lastmod>2020-08-27</lastmod>
     
   </url>
   
   <url>
-    <loc>https://iahc.gitee.io/blog/2020/08/28/testpage02/</loc>
+    <loc>https://iahccc.github.io/2020/08/28/testpage02/</loc>
     
     <lastmod>2020-08-27</lastmod>
     
@@ -24,7 +24,7 @@
   
 
   <url>
-    <loc>https://iahc.gitee.io/blog</loc>
+    <loc>https://iahccc.github.io/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -32,14 +32,14 @@
 
   
   <url>
-    <loc>https://iahc.gitee.io/blog/tags/java/</loc>
+    <loc>https://iahccc.github.io/tags/html/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://iahc.gitee.io/blog/tags/html/</loc>
+    <loc>https://iahccc.github.io/tags/java/</loc>
     <lastmod>2020-08-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
