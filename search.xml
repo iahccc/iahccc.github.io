@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World aaa</title>
+    <url>/2020/08/28/hello-world/</url>
+    <content><![CDATA[<p>hhh</p>
+<h1 id="fsdf欢迎！！！-测试测试-2020-08-28-23-10"><a href="#fsdf欢迎！！！-测试测试-2020-08-28-23-10" class="headerlink" title="fsdf欢迎！！！ 测试测试 2020/08/28 23:10"></a>fsdf欢迎！！！ 测试测试 2020/08/28 23:10</h1><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
+<p>略略略<br>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <tags>
+        <tag>html</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>testpage</title>
+    <url>/2020/08/27/testpage/</url>
+    <content><![CDATA[<h1 id="Welcome"><a href="#Welcome" class="headerlink" title="Welcome !!!"></a>Welcome !!!</h1><p><img src= "/img/loading.gif" data-lazy-src="testpage-cover.jpg"></p>
+<h3 id="iahc的博客测试"><a href="#iahc的博客测试" class="headerlink" title="iahc的博客测试"></a>iahc的博客测试</h3>]]></content>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>testpage02</title>
+    <url>/2020/08/28/testpage02/</url>
+    <content><![CDATA[<p>aaaaa</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>testpage03</title>
+    <url>/2020/08/29/testpage03/</url>
+    <content><![CDATA[<h1 id="this-is-my-testpage03-test-test"><a href="#this-is-my-testpage03-test-test" class="headerlink" title="this is my testpage03 test test"></a>this is my testpage03 test test</h1><h2 id="line2"><a href="#line2" class="headerlink" title="line2"></a>line2</h2><h3 id="line3"><a href="#line3" class="headerlink" title="line3"></a>line3</h3><h3 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.hexo clean  </span><br><span class="line"></span><br><span class="line">2.hexo generate </span><br><span class="line"></span><br><span class="line">3.hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>第一行</p>
+<p><em>第二行</em></p>
+<p><del>删除线</del></p>
+<hr>
+<p><u>下划线</u></p>
+<ul>
+<li>aaa</li>
+</ul>
+<ol>
+<li>bbb<ol start="2">
+<li>ccc</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>aaa<br>*aaa</p>
+</blockquote>
+<p><code>printf()</code></p>
+<pre><code>public void static main(String[] args) &#123;
+    System.out.println(&quot;hello word&quot;);
+&#125;</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">&quot;hello word&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>百度网址<a href="http://www.baidu.com/">百度</a></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://blog.iahc.xyz/img/avatar.png"></p>
+<table>
+<thead>
+<tr>
+<th>表aa头</th>
+<th>表aa</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单元格</td>
+<td>单元格</td>
+</tr>
+<tr>
+<td>单元格</td>
+<td>单元格</td>
+</tr>
+</tbody></table>
+]]></content>
+  </entry>
+</search>

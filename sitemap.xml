@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.iahc.xyz/categories/index.html</loc>
+    
+    <lastmod>2020-08-29</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.iahc.xyz/tags/index.html</loc>
+    
+    <lastmod>2020-08-29</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.iahc.xyz/2020/08/28/hello-world/</loc>
     
     <lastmod>2020-08-28</lastmod>
