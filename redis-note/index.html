@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Redis笔记 | Iahc's Blog</title><meta name="description" content="Redis编译安装安装步骤wget *redis安装包url*    tar -zxvf *redis安装包路径*    cd *redis解压包路径*    sudo mkdir &#x2F;usr&#x2F;local&#x2F;redis    sudo make    sudo make PREFIX&#x3D;&#x2F;usr&#x2F;local&#x2F;redis install    sudo mkdir &#x2F;usr&#x2F;local&#x2F;redis&#x2F;etc"><meta name="keywords" content="redis"><meta name="author" content="iahc"><meta name="copyright" content="iahc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iahccc/PicBed/img/创作.png"><link rel="canonical" href="https://blog.iahc.top/redis-note/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="Redis笔记"><meta property="og:url" content="https://blog.iahc.top/redis-note/"><meta property="og:site_name" content="Iahc's Blog"><meta property="og:description" content="Redis编译安装安装步骤wget *redis安装包url*    tar -zxvf *redis安装包路径*    cd *redis解压包路径*    sudo mkdir &#x2F;usr&#x2F;local&#x2F;redis    sudo make    sudo make PREFIX&#x3D;&#x2F;usr&#x2F;local&#x2F;redis install    sudo mkdir &#x2F;usr&#x2F;local&#x2F;redis&#x2F;etc"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/iahccc/PicBed/img/archive_img.jpeg"><meta property="article:published_time" content="2020-11-15T09:14:11.000Z"><meta property="article:modified_time" content="2020-12-11T04:01:01.740Z"><meta name="twitter:card" content="summary"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime: '',
+  date_suffix: {"one_hour":"刚刚","hours":"小时前","day":"天前"},
+  copyright: {"limitCount":50,"languages":{"author":"作者: iahc","link":"链接: ","source":"来源: Iahc's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+      const now = new Date()
+      const expiryDay = ttl * 86400000
+      const item = {
+        value: value,
+        expiry: now.getTime() + expiryDay,
+      }
+      localStorage.setItem(key, JSON.stringify(item))
+    },
+  
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isSidebar: true,
+  postUpdate: '2020-12-11 12:01:01'
+}</script><noscript><style type="text/css">
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+  }
+}
+
+var autoChangeMode = 'true'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="alternate" href="/atom.xml" title="Iahc's Blog" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/iahccc/PicBed/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">4</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">4</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/mylogs/"><i class="fa-fw fas fa-star"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">Redis编译安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.</span> <span class="toc-text">安装步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEredis%E4%BB%A5%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E6%96%B9%E5%BC%8F%E8%BF%90%E8%A1%8C"><span class="toc-number">1.2.</span> <span class="toc-text">设置redis以守护进程方式运行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">1.3.</span> <span class="toc-text">添加环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E9%AB%98%E5%8F%AF%E7%94%A8%E6%96%B9%E6%A1%88"><span class="toc-number">1.4.</span> <span class="toc-text">Redis高可用方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis%E5%A4%8D%E5%88%B6-Replication-%E5%92%8C%E5%93%A8%E5%85%B5-Sentinel-%E6%9C%BA%E5%88%B6"><span class="toc-number">1.4.1.</span> <span class="toc-text">Redis复制(Replication)和哨兵(Sentinel)机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Replication%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">Replication工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sentinel%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">Sentinel工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">搭建步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%A5%E8%84%9A%E6%9C%AC%E6%96%B9%E5%BC%8F%E5%90%AF%E5%8A%A8"><span class="toc-number">1.4.1.4.</span> <span class="toc-text">配置以脚本方式启动</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/iahccc/PicBed/img/archive_img.jpeg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Iahc's Blog</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/mylogs/"><i class="fa-fw fas fa-star"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Redis笔记</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-15T09:14:11.000Z" title="发表于 2020-11-15 17:14:11">2020-11-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-12-11T04:01:01.740Z" title="更新于 2020-12-11 12:01:01">2020-12-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/redis/">redis</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/redis-note/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/redis-note/" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="Redis编译安装"><a href="#Redis编译安装" class="headerlink" title="Redis编译安装"></a>Redis编译安装</h1><h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><pre><code>wget *redis安装包url*  
+
+tar -zxvf *redis安装包路径*  
+
+cd *redis解压包路径*  
+
+sudo mkdir /usr/local/redis  
+
+sudo make  
+
+sudo make PREFIX=/usr/local/redis install  
+
+sudo mkdir /usr/local/redis/etc  
+
+sudo cp redis.conf /usr/local/redis/etc/  </code></pre>
+<h2 id="设置redis以守护进程方式运行"><a href="#设置redis以守护进程方式运行" class="headerlink" title="设置redis以守护进程方式运行"></a>设置redis以守护进程方式运行</h2><p>将/usr/local/redis/etc/redis.conf文件中的daemonize改为yes</p>
+<h2 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h2><pre><code># 如果提示权限不足,则先运行 su 命令进入管理员模式，再输入该语句。
+sudo echo &#39;export PATH=&quot;$PATH:/usr/local/redis/bin&quot;&#39; &gt;&gt; /etc/profile   
+source /etc/profile</code></pre>
+<h2 id="Redis高可用方案"><a href="#Redis高可用方案" class="headerlink" title="Redis高可用方案"></a>Redis高可用方案</h2><p>Redis高可用常见的几种方式：</p>
+<ul>
+<li>Redis复制(Replication)和哨兵(Sentinel)机制</li>
+<li>Redis集群(Redis-cluster模式)</li>
+</ul>
+<h3 id="Redis复制-Replication-和哨兵-Sentinel-机制"><a href="#Redis复制-Replication-和哨兵-Sentinel-机制" class="headerlink" title="Redis复制(Replication)和哨兵(Sentinel)机制"></a>Redis复制(Replication)和哨兵(Sentinel)机制</h3><h4 id="Replication工作原理"><a href="#Replication工作原理" class="headerlink" title="Replication工作原理"></a>Replication工作原理</h4><p><em>todo</em></p>
+<h4 id="Sentinel工作原理"><a href="#Sentinel工作原理" class="headerlink" title="Sentinel工作原理"></a>Sentinel工作原理</h4><p><em>todo</em></p>
+<h4 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h4><p>将redis.conf文件复制为redis-master-7000.conf、redis-slave-7001.conf、redis-slave-7002.conf并修改(文件名以端口号结尾)</p>
+<pre><code># 服务器端口号，主从分别修改为7000/7001/7002
+port &lt;端口号&gt;
+# 使得Redis可以跨网络访问 
+bind 0.0.0.0 
+# 配置reids的密码 
+requirepass &quot;111111&quot; 
+
+# 下面两个配置只需要配置从节点(slave) 
+# 配置主服务器地址、端口号 
+replicaof 127.0.0.1 7001 
+# 主服务器密码 
+masterauth &quot;111111&quot;</code></pre>
+<p>分别启动三个Redis服务</p>
+<pre><code>redis-server /usr/local/redis/etc/redis-master-7000.conf
+redis-server /usr/local/redis/etc/redis-slave-7001.conf
+redis-server /usr/local/redis/etc/redis-slave-7002.conf</code></pre>
+<p>使用redis-cli工具连接redis服务查看主从节点是否搭建成功</p>
+<pre><code>redis-cli -h &lt;主机名&gt; -p &lt;端口号&gt;</code></pre>
+<p>验证密码后输入进行验证<br>    info replication</p>
+<p>接下来配置哨兵Sentinel。</p>
+<p>将sentinel.conf文件复制为sentinel-27000.conf、sentinel-27001.conf、sentinel-27002.conf(文件名以端口号结尾)并修改<strong>(注意文件权限问题，需要给用户写权限)</strong></p>
+<pre><code># 三个配置文件分别配置不同的端口号
+port &lt;端口号&gt;
+# 设置为后台启动
+daemonize yes
+# 主节点的名称(可以自定义，与后面的配置保持一致即可)
+# 主机地址
+# 端口号
+# 数量(2代表只有两个或两个以上的哨兵认为主服务器不可用的时候，才会进行failover操作)
+sentinel monitor mymaster 127.0.0.1 6379 2
+# 多长时间没有响应认为主观下线(SDOWN)
+sentinel down-after-milliseconds mymaster 60000
+# 表示如果15秒后,mysater仍没活过来，则启动failover，从剩下从节点序曲新的主节点
+sentinel failover-timeout mymaster 15000
+# 指定了在执行故障转移时， 最多可以有多少个从服务器同时对新的主服务器进行同步， 这个数字越小， 完成故障转移所需的时间就越长
+sentinel parallel-syncs mymaster 1</code></pre>
+<p>启动三个Sentinel</p>
+<pre><code>redis-sentinel /usr/local/redis/etc/sentinel-27000.conf
+redis-sentinel /usr/local/redis/etc/sentinel-27001.conf
+redis-sentinel /usr/local/redis/etc/sentinel-27002.conf</code></pre>
+<p>然后手动关闭主节点的redis服务，并查看两个slave信息是否有一个变成了master。</p>
+<h4 id="配置以脚本方式启动"><a href="#配置以脚本方式启动" class="headerlink" title="配置以脚本方式启动"></a>配置以脚本方式启动</h4><p>在redis的bin目录下新建redis-replication-sentinel-startup.sh和redis-replication-sentinel-shutdown.sh<br>startup.sh内容如下:</p>
+<pre><code>redis-server /usr/local/redis/etc/redis-master-7000.conf
+redis-server /usr/local/redis/etc/redis-slave-7001.conf
+redis-server /usr/local/redis/etc/redis-slave-7002.conf
+
+redis-sentinel /usr/local/redis/etc/sentinel-27000.conf
+redis-sentinel /usr/local/redis/etc/sentinel-27001.conf
+redis-sentinel /usr/local/redis/etc/sentinel-27002.conf
+echo started。。。。。。。</code></pre>
+<p>shutdown.sh内容如下:</p>
+<pre><code>redis-cli -p 7000 shutdown
+redis-cli -p 7001 shutdown
+redis-cli -p 7002 shutdown
+
+redis-cli -p 27000 shutdown
+redis-cli -p 27001 shutdown
+redis-cli -p 27002 shutdown</code></pre>
+<p>为两个文件添加可执行权限:</p>
+<pre><code>sudo chmod +x &lt;filename&gt;</code></pre>
+<p>参考链接:<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7d5fbf90bcd7">Redis高可用方案</a><br>未完待续。。。</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">iahc</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.iahc.top/redis-note/">https://blog.iahc.top/redis-note/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.iahc.top" target="_blank">Iahc's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/redis/">redis</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/iahccc/PicBed/img/archive_img.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/resource-collection/"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/iahccc/PicBed/img/archive_img.jpeg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">资源整理</div></div></a></div><div class="next-post pull-right"><a href="/linux-note/"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/iahccc/PicBed/img/archive_img.jpeg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">linux笔记</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By iahc</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    window.valine = new Valine({
+      el: '#vcomment',
+      appId: 'ueCTnetv9jhjKXH9FcgAsMTk-MdYXbMMI',
+      appKey: 'TgxohXtkG0Vwwk1aAj231gn2',
+      placeholder: '提示：昵称栏输入QQ后按下Tab键，可以自动获取昵称和邮箱哦！',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    });
+    if ('nick,mail') { valine.config.requiredFields= 'nick,mail'.split(',') }
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/gh/iahccc/PicBed/js/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script></div></body></html>
