@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>java-note</title>
+    <title>Java笔记</title>
     <url>/java-note/</url>
     <content><![CDATA[<h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="“-”和equals有什么区别？"><a href="#“-”和equals有什么区别？" class="headerlink" title="“==”和equals有什么区别？"></a>“==”和equals有什么区别？</h2><ol>
 <li><p>“==”对于基本类型来说比较的是值是否相同，对于引用类型来说比较多是引用的地址是否相同。</p>
@@ -59,6 +59,9 @@
 </ul>
 <p>参考博文：<a href="https://blog.csdn.net/fangchao2011/article/details/89203535">最新Java面试题，常见面试题及答案汇总</a></p>
 ]]></content>
+      <tags>
+        <tag>java</tag>
+      </tags>
   </entry>
   <entry>
     <title>linux笔记</title>
