@@ -9,13 +9,6 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/linux-note/</loc>
-    
-    <lastmod>2020-12-11</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.iahc.top/redis-note/</loc>
     
     <lastmod>2020-12-11</lastmod>
@@ -23,7 +16,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/markdown/</loc>
+    <loc>https://blog.iahc.top/linux-note/</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -37,21 +30,14 @@
   </url>
   
   <url>
+    <loc>https://blog.iahc.top/markdown/</loc>
+    
+    <lastmod>2020-12-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.iahc.top/music.html</loc>
-    
-    <lastmod>2020-12-11</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.iahc.top/mylogs/index.html</loc>
-    
-    <lastmod>2020-12-11</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.iahc.top/about/index.html</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -65,7 +51,21 @@
   </url>
   
   <url>
+    <loc>https://blog.iahc.top/mylogs/index.html</loc>
+    
+    <lastmod>2020-12-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.iahc.top/tags/index.html</loc>
+    
+    <lastmod>2020-12-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.iahc.top/about/index.html</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -81,13 +81,6 @@
 
   
   <url>
-    <loc>https://blog.iahc.top/tags/linux-apt-vim/</loc>
-    <lastmod>2020-12-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.iahc.top/tags/redis/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
@@ -95,7 +88,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/tags/Markdown/</loc>
+    <loc>https://blog.iahc.top/tags/linux-apt-vim/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -108,17 +101,24 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://blog.iahc.top/tags/Markdown/</loc>
+    <lastmod>2020-12-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
-    <loc>https://blog.iahc.top/categories/linux/</loc>
+    <loc>https://blog.iahc.top/categories/redis/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/categories/redis/</loc>
+    <loc>https://blog.iahc.top/categories/linux/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -3,43 +3,61 @@
   <entry>
     <title>java-note</title>
     <url>/java-note/</url>
-    <content><![CDATA[<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1>]]></content>
-  </entry>
-  <entry>
-    <title>linux笔记</title>
-    <url>/linux-note/</url>
-    <content><![CDATA[<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><h3 id="apt软件卸载"><a href="#apt软件卸载" class="headerlink" title="apt软件卸载"></a>apt软件卸载</h3><pre><code>apt-get purge / apt-get –purge remove </code></pre>
-<p>删除已安装包（不保留配置文件)。<br>如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件</p>
-<pre><code>apt-get autoremove </code></pre>
-<p>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。</p>
-<pre><code>apt-get remove </code></pre>
-<p>删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。</p>
-<pre><code>apt-get autoclean </code></pre>
-<p>APT的底层包是dpkg, 而dpkg 安装Package时, 会将 *.deb 放在 /var/cache/apt/archives/中，apt-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。</p>
-<pre><code>apt-get clean </code></pre>
-<p>使用 apt-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/*.deb。</p>
-<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h3><pre><code>set number 
-set ts=4
-set expandtab
-set autoindent
-set softtabstop=4 
-set shiftwidth=4</code></pre>
-<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="多行编辑"><a href="#多行编辑" class="headerlink" title="多行编辑"></a>多行编辑</h4><ol>
-<li>在命令行模式按Ctrl+V进入块模式</li>
-<li>利用上下左右键选择需要编辑多少行、从哪开始</li>
-<li>输入大写字母“I”进入插入模式</li>
-<li>编辑行</li>
-<li>再次按Esc键回到命令行模式即可完成多行编辑</li>
+    <content><![CDATA[<h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="“-”和equals有什么区别？"><a href="#“-”和equals有什么区别？" class="headerlink" title="“==”和equals有什么区别？"></a>“==”和equals有什么区别？</h2><ol>
+<li><p>“==”对于基本类型来说比较的是值是否相同，对于引用类型来说比较多是引用的地址是否相同。</p>
+</li>
+<li><p>equals本质上就是“==”，比较的是引用，String、Integer等类重写了equals方法使其变成了值比较。</p>
+</li>
 </ol>
-<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>全局替换a为b<br>    :%s/a/b/g</p>
-<h2 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h2><p>杀死包含某关键字的所以进程<br>    ps -ef | grep param | grep -v grep | cut -c 9-15 | xargs kill -9<br>    或<br>    ps x | grep param | grep -v grep | awk ‘{print $1}’ | xargs kill -9</p>
+<h2 id="两个对象的-hashCode-相同，则-equals-也一定为-true，对吗？"><a href="#两个对象的-hashCode-相同，则-equals-也一定为-true，对吗？" class="headerlink" title="两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？"></a>两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？</h2><p>错误，两个不相同的对象有可能会发生hash冲突。</p>
+<h2 id="final-在-java-中有什么作用？"><a href="#final-在-java-中有什么作用？" class="headerlink" title="final 在 java 中有什么作用？"></a>final 在 java 中有什么作用？</h2><ul>
+<li>final修饰的类叫最终类，该类不能被继承。</li>
+<li>final修饰的方法不能被重写。</li>
+<li>final修饰的变量叫常量，常量必须初始化，初始化之后值就不能再被更改了。</li>
+</ul>
+<h2 id="java-中的-Math-round-1-5-等于多少？"><a href="#java-中的-Math-round-1-5-等于多少？" class="headerlink" title="java 中的 Math.round(-1.5) 等于多少？"></a>java 中的 Math.round(-1.5) 等于多少？</h2><p>等于-1，该方法原理是原数+0.5再向下取整。</p>
+<h2 id="String-属于基础的数据类型吗？"><a href="#String-属于基础的数据类型吗？" class="headerlink" title="String 属于基础的数据类型吗？"></a>String 属于基础的数据类型吗？</h2><p>不属于，String属于引用类型，基础数据类型有8种：byte,short,int,long,char,boolean,float,double。</p>
+<h2 id="java-中操作字符串都有哪些类？它们之间有什么区别？"><a href="#java-中操作字符串都有哪些类？它们之间有什么区别？" class="headerlink" title="java 中操作字符串都有哪些类？它们之间有什么区别？"></a>java 中操作字符串都有哪些类？它们之间有什么区别？</h2><p>String,StringBuilder,StringBuffer。String声明的是不可变对象，其余两个可以在原有对象的基础上进行操作，所以经常对字符串进行操作的情况下最好不要使用String类型。</p>
+<p>StringBuilder和Stringbuffer的区别是前者线程不安全，且性能较高，后者线程安全，但性能较弱。</p>
+<h2 id="String-str-”i”与-String-str-new-String-“i”-一样吗？"><a href="#String-str-”i”与-String-str-new-String-“i”-一样吗？" class="headerlink" title="String str=”i”与 String str=new String(“i”)一样吗？"></a>String str=”i”与 String str=new String(“i”)一样吗？</h2><p>不一样，虚拟机会将前者分配到常量池中，而后者会被分配到堆内存中。</p>
+<h2 id="如何将字符串反转？"><a href="#如何将字符串反转？" class="headerlink" title="如何将字符串反转？"></a>如何将字符串反转？</h2><p>使用StringBuffer或StringBuilder中的reverse()方法。</p>
+<h2 id="String-类的常用方法都有那些？"><a href="#String-类的常用方法都有那些？" class="headerlink" title="String 类的常用方法都有那些？"></a>String 类的常用方法都有那些？</h2><ul>
+<li>indexof</li>
+<li>split</li>
+<li>replace</li>
+<li>chartAt</li>
+<li>length</li>
+<li>toLowerCase</li>
+<li>toUpperCase</li>
+<li>substring</li>
+<li>equals</li>
+<li>trim</li>
+<li>getBytes</li>
+</ul>
+<h2 id="抽象类必须要有抽象方法吗？"><a href="#抽象类必须要有抽象方法吗？" class="headerlink" title="抽象类必须要有抽象方法吗？"></a>抽象类必须要有抽象方法吗？</h2><p>不是必须的。</p>
+<h2 id="抽象类能使用-final-修饰吗？"><a href="#抽象类能使用-final-修饰吗？" class="headerlink" title="抽象类能使用 final 修饰吗？"></a>抽象类能使用 final 修饰吗？</h2><p>不能。抽象类本来就是要让其他类继承的，抽象类使用final修饰就代表了不能被继承，这与抽象类的设计理念产生矛盾。</p>
+<h2 id="接口和抽象类有什么区别？"><a href="#接口和抽象类有什么区别？" class="headerlink" title="接口和抽象类有什么区别？"></a>接口和抽象类有什么区别？</h2><p>…</p>
+<h2 id="java-中-IO-流分为几种？"><a href="#java-中-IO-流分为几种？" class="headerlink" title="java 中 IO 流分为几种？"></a>java 中 IO 流分为几种？</h2><ul>
+<li>按功能分：输入流、输出流。</li>
+<li>按类型分：字节流、字符流。</li>
+</ul>
+<h2 id="BIO、NIO、AIO-有什么区别？"><a href="#BIO、NIO、AIO-有什么区别？" class="headerlink" title="BIO、NIO、AIO 有什么区别？"></a>BIO、NIO、AIO 有什么区别？</h2><ul>
+<li>BIO: Block IO同步阻塞式IO。</li>
+<li>NIO：New IO同步非阻塞试IO，是BIO的升级，客户端和服务端通过Channel通讯，实现多路复用。</li>
+<li>AIO：Asynchronous IO是NIO的升级，也叫NIO2。实现了异步非阻塞IO，异步IO的操作是基于事件和回调机制。</li>
+</ul>
+<h2 id="Files的常用方法都有哪些？"><a href="#Files的常用方法都有哪些？" class="headerlink" title="Files的常用方法都有哪些？"></a>Files的常用方法都有哪些？</h2><ul>
+<li>exits</li>
+<li>createFile</li>
+<li>createDirectory</li>
+<li>delete</li>
+<li>copy</li>
+<li>move</li>
+<li>size</li>
+<li>read</li>
+<li>write</li>
+</ul>
 ]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux apt vim</tag>
-      </tags>
   </entry>
   <entry>
     <title>Redis笔记</title>
@@ -141,6 +159,51 @@ redis-cli -p 27002 shutdown</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>linux笔记</title>
+    <url>/linux-note/</url>
+    <content><![CDATA[<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><h3 id="apt软件卸载"><a href="#apt软件卸载" class="headerlink" title="apt软件卸载"></a>apt软件卸载</h3><pre><code>apt-get purge / apt-get –purge remove </code></pre>
+<p>删除已安装包（不保留配置文件)。<br>如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件</p>
+<pre><code>apt-get autoremove </code></pre>
+<p>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。</p>
+<pre><code>apt-get remove </code></pre>
+<p>删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。</p>
+<pre><code>apt-get autoclean </code></pre>
+<p>APT的底层包是dpkg, 而dpkg 安装Package时, 会将 *.deb 放在 /var/cache/apt/archives/中，apt-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。</p>
+<pre><code>apt-get clean </code></pre>
+<p>使用 apt-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/*.deb。</p>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h3><pre><code>set number 
+set ts=4
+set expandtab
+set autoindent
+set softtabstop=4 
+set shiftwidth=4</code></pre>
+<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="多行编辑"><a href="#多行编辑" class="headerlink" title="多行编辑"></a>多行编辑</h4><ol>
+<li>在命令行模式按Ctrl+V进入块模式</li>
+<li>利用上下左右键选择需要编辑多少行、从哪开始</li>
+<li>输入大写字母“I”进入插入模式</li>
+<li>编辑行</li>
+<li>再次按Esc键回到命令行模式即可完成多行编辑</li>
+</ol>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>全局替换a为b<br>    :%s/a/b/g</p>
+<h2 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h2><p>杀死包含某关键字的所以进程<br>    ps -ef | grep param | grep -v grep | cut -c 9-15 | xargs kill -9<br>    或<br>    ps x | grep param | grep -v grep | awk ‘{print $1}’ | xargs kill -9</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux apt vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>资源整理</title>
+    <url>/resource-collection/</url>
+    <content><![CDATA[<p><a href="https://cdn.jsdelivr.net/gh/iahccc/PicBed/Java3y/">java3y教程</a><br><a href="https://github.com/apache/rocketmq/blob/master/docs/cn/">Apache RocketMQ开发者指南</a></p>
+]]></content>
+      <tags>
+        <tag>resource</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown语法</title>
     <url>/markdown/</url>
     <content><![CDATA[<h1 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，其编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档，编写的文档后缀为 .md, .markdown。</p>
@@ -159,15 +222,6 @@ redis-cli -p 27002 shutdown</code></pre>
       </categories>
       <tags>
         <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>资源整理</title>
-    <url>/resource-collection/</url>
-    <content><![CDATA[<p><a href="https://cdn.jsdelivr.net/gh/iahccc/PicBed/Java3y/">java3y教程</a><br><a href="https://github.com/apache/rocketmq/blob/master/docs/cn/">Apache RocketMQ开发者指南</a></p>
-]]></content>
-      <tags>
-        <tag>resource</tag>
       </tags>
   </entry>
 </search>
