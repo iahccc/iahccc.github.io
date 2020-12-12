@@ -9,7 +9,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/markdown/</loc>
+    <loc>https://blog.iahc.top/linux-note/</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -23,14 +23,14 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/linux-note/</loc>
+    <loc>https://blog.iahc.top/resource-collection/</loc>
     
     <lastmod>2020-12-11</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/resource-collection/</loc>
+    <loc>https://blog.iahc.top/markdown/</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -51,6 +51,13 @@
   </url>
   
   <url>
+    <loc>https://blog.iahc.top/tags/index.html</loc>
+    
+    <lastmod>2020-12-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.iahc.top/mylogs/index.html</loc>
     
     <lastmod>2020-12-11</lastmod>
@@ -59,13 +66,6 @@
   
   <url>
     <loc>https://blog.iahc.top/categories/index.html</loc>
-    
-    <lastmod>2020-12-11</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.iahc.top/tags/index.html</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -81,7 +81,7 @@
 
   
   <url>
-    <loc>https://blog.iahc.top/tags/Markdown/</loc>
+    <loc>https://blog.iahc.top/tags/linux-apt-vim/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -95,14 +95,14 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/tags/linux-apt-vim/</loc>
+    <loc>https://blog.iahc.top/tags/resource/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/tags/resource/</loc>
+    <loc>https://blog.iahc.top/tags/Markdown/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -111,7 +111,7 @@
 
   
   <url>
-    <loc>https://blog.iahc.top/categories/Markdown/</loc>
+    <loc>https://blog.iahc.top/categories/linux/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -125,7 +125,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/categories/linux/</loc>
+    <loc>https://blog.iahc.top/categories/Markdown/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
