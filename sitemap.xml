@@ -9,6 +9,13 @@
   </url>
   
   <url>
+    <loc>https://blog.iahc.top/markdown/</loc>
+    
+    <lastmod>2020-12-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.iahc.top/redis-note/</loc>
     
     <lastmod>2020-12-11</lastmod>
@@ -30,13 +37,6 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/markdown/</loc>
-    
-    <lastmod>2020-12-11</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.iahc.top/music.html</loc>
     
     <lastmod>2020-12-11</lastmod>
@@ -44,7 +44,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/categories/index.html</loc>
+    <loc>https://blog.iahc.top/about/index.html</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -58,14 +58,14 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/tags/index.html</loc>
+    <loc>https://blog.iahc.top/categories/index.html</loc>
     
     <lastmod>2020-12-11</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/about/index.html</loc>
+    <loc>https://blog.iahc.top/tags/index.html</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -79,6 +79,13 @@
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>https://blog.iahc.top/tags/Markdown/</loc>
+    <lastmod>2020-12-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
   <url>
     <loc>https://blog.iahc.top/tags/redis/</loc>
@@ -101,14 +108,14 @@
     <priority>0.6</priority>
   </url>
   
+
+  
   <url>
-    <loc>https://blog.iahc.top/tags/Markdown/</loc>
+    <loc>https://blog.iahc.top/categories/Markdown/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
-  
-
   
   <url>
     <loc>https://blog.iahc.top/categories/redis/</loc>
@@ -119,13 +126,6 @@
   
   <url>
     <loc>https://blog.iahc.top/categories/linux/</loc>
-    <lastmod>2020-12-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.iahc.top/categories/Markdown/</loc>
     <lastmod>2020-12-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
