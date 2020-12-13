@@ -160,7 +160,84 @@
 <li>Runcable接口中run方法的返回值是void</li>
 <li>Callable接口中run方法的返回值为泛型。通过与Future、FutureTask配合可以获取异步执行结果。</li>
 </ul>
-<h2 id="线程有哪些状态？"><a href="#线程有哪些状态？" class="headerlink" title="线程有哪些状态？"></a>线程有哪些状态？</h2><h2 id="sleep-和-wait-有什么区别？"><a href="#sleep-和-wait-有什么区别？" class="headerlink" title="sleep() 和 wait() 有什么区别？"></a>sleep() 和 wait() 有什么区别？</h2><h2 id="notify-和-notifyAll-有什么区别？"><a href="#notify-和-notifyAll-有什么区别？" class="headerlink" title="notify()和 notifyAll()有什么区别？"></a>notify()和 notifyAll()有什么区别？</h2><h2 id="线程的-run-和-start-有什么区别？"><a href="#线程的-run-和-start-有什么区别？" class="headerlink" title="线程的 run()和 start()有什么区别？"></a>线程的 run()和 start()有什么区别？</h2><h2 id="创建线程池有哪几种方式？"><a href="#创建线程池有哪几种方式？" class="headerlink" title="创建线程池有哪几种方式？"></a>创建线程池有哪几种方式？</h2><h2 id="线程池都有哪些状态？"><a href="#线程池都有哪些状态？" class="headerlink" title="线程池都有哪些状态？"></a>线程池都有哪些状态？</h2><h2 id="线程池中-submit-和-execute-方法有什么区别？"><a href="#线程池中-submit-和-execute-方法有什么区别？" class="headerlink" title="线程池中 submit()和 execute()方法有什么区别？"></a>线程池中 submit()和 execute()方法有什么区别？</h2><h2 id="在-java-程序中怎么保证多线程的运行安全？"><a href="#在-java-程序中怎么保证多线程的运行安全？" class="headerlink" title="在 java 程序中怎么保证多线程的运行安全？"></a>在 java 程序中怎么保证多线程的运行安全？</h2><h2 id="多线程锁的升级原理是什么？"><a href="#多线程锁的升级原理是什么？" class="headerlink" title="多线程锁的升级原理是什么？"></a>多线程锁的升级原理是什么？</h2><h2 id="什么是死锁？"><a href="#什么是死锁？" class="headerlink" title="什么是死锁？"></a>什么是死锁？</h2><h2 id="怎么防止死锁？"><a href="#怎么防止死锁？" class="headerlink" title="怎么防止死锁？"></a>怎么防止死锁？</h2><h2 id="ThreadLocal-是什么？有哪些使用场景？"><a href="#ThreadLocal-是什么？有哪些使用场景？" class="headerlink" title="ThreadLocal 是什么？有哪些使用场景？"></a>ThreadLocal 是什么？有哪些使用场景？</h2><h2 id="说一下-synchronized-底层实现原理？"><a href="#说一下-synchronized-底层实现原理？" class="headerlink" title="说一下 synchronized 底层实现原理？"></a>说一下 synchronized 底层实现原理？</h2><h2 id="synchronized-和-volatile-的区别是什么？"><a href="#synchronized-和-volatile-的区别是什么？" class="headerlink" title="synchronized 和 volatile 的区别是什么？"></a>synchronized 和 volatile 的区别是什么？</h2><h2 id="synchronized-和-Lock-有什么区别？"><a href="#synchronized-和-Lock-有什么区别？" class="headerlink" title="synchronized 和 Lock 有什么区别？"></a>synchronized 和 Lock 有什么区别？</h2><h2 id="synchronized-和-ReentrantLock-区别是什么？"><a href="#synchronized-和-ReentrantLock-区别是什么？" class="headerlink" title="synchronized 和 ReentrantLock 区别是什么？"></a>synchronized 和 ReentrantLock 区别是什么？</h2><h2 id="说一下-atomic-的原理？"><a href="#说一下-atomic-的原理？" class="headerlink" title="说一下 atomic 的原理？"></a>说一下 atomic 的原理？</h2><p>参考博文：<a href="https://blog.csdn.net/fangchao2011/article/details/89203535">最新Java面试题，常见面试题及答案汇总</a></p>
+<h2 id="线程有哪些状态？"><a href="#线程有哪些状态？" class="headerlink" title="线程有哪些状态？"></a>线程有哪些状态？</h2><ol>
+<li>创建状态：生成线程对象，还没有调用start方法。</li>
+<li>就绪状态：调用线程对象的start方法后进入就绪状态。线程阻塞结束之后也会进入就绪状态。</li>
+<li>运行状态：当线程获取到CPU时间片之后，进入运行状态。</li>
+<li>阻塞状态：调用sleep/join方法时进入阻塞状态。</li>
+<li>死亡状态：run方法执行结束或异常退出。</li>
+</ol>
+<h2 id="sleep-和-wait-有什么区别？"><a href="#sleep-和-wait-有什么区别？" class="headerlink" title="sleep() 和 wait() 有什么区别？"></a>sleep() 和 wait() 有什么区别？</h2><p>调用sleep方法会使线程进入休眠状态，休眠结束之后，会进入就绪状态。需要注意点事sleep方法不会释放锁。<br>wait方法是Object类中的方法，当调用该方法后，该线程就会进入该对象相关的等待池，同时会释放所持有的锁，可以通过notify/notifyAll方法来唤醒等待的线程。</p>
+<h2 id="notify-和-notifyAll-有什么区别？"><a href="#notify-和-notifyAll-有什么区别？" class="headerlink" title="notify()和 notifyAll()有什么区别？"></a>notify()和 notifyAll()有什么区别？</h2><p>notify方法随机唤醒一个等待池中的线程，而notifyAll会将所有等待池中等的线程一起唤醒。</p>
+<h2 id="线程的-run-和-start-有什么区别？"><a href="#线程的-run-和-start-有什么区别？" class="headerlink" title="线程的 run()和 start()有什么区别？"></a>线程的 run()和 start()有什么区别？</h2><p>start方法是多线程的启动方法，直接调用run方法就等于直接调用了一个普通的函数。</p>
+<h2 id="创建线程池有哪几种方式？"><a href="#创建线程池有哪几种方式？" class="headerlink" title="创建线程池有哪几种方式？"></a>创建线程池有哪几种方式？</h2><ol>
+<li>newFixedThreadPool<br> 这是一个长度固定的线程池。</li>
+<li>newCachedThreadPool<br> 可缓存的线程池。</li>
+<li>newSingleThreadExecutor<br> 单线池。</li>
+<li>newScheduledThreadPoll<br> 长度固定的线程池，并且以延迟或者定时的方式来执行任务，类似于Timer。</li>
+</ol>
+<h2 id="线程池都有哪些状态？"><a href="#线程池都有哪些状态？" class="headerlink" title="线程池都有哪些状态？"></a>线程池都有哪些状态？</h2><p>…</p>
+<h2 id="线程池中-submit-和-execute-方法有什么区别？"><a href="#线程池中-submit-和-execute-方法有什么区别？" class="headerlink" title="线程池中 submit()和 execute()方法有什么区别？"></a>线程池中 submit()和 execute()方法有什么区别？</h2><ol>
+<li>接受参数不一样。</li>
+<li>suubmit有返回值，execute没有。</li>
+<li>submit方便Exception处理。</li>
+</ol>
+<h2 id="在-java-程序中怎么保证多线程的运行安全？"><a href="#在-java-程序中怎么保证多线程的运行安全？" class="headerlink" title="在 java 程序中怎么保证多线程的运行安全？"></a>在 java 程序中怎么保证多线程的运行安全？</h2><p>线程安全在三个方面体现：</p>
+<ul>
+<li><p>原子性：提供互斥访问，同一时刻只能有一个线程对数据进行操作，（atomic,synchronized）；</p>
+</li>
+<li><p>可见性：一个线程对主内存的修改可以及时地被其他线程看到，（synchronized,volatile）；</p>
+</li>
+<li><p>有序性：一个线程观察其他线程中的指令执行顺序，由于指令重排序，该观察结果一般杂乱无序，（happens-before原则）。</p>
+</li>
+</ul>
+<h2 id="多线程锁的升级原理是什么？"><a href="#多线程锁的升级原理是什么？" class="headerlink" title="多线程锁的升级原理是什么？"></a>多线程锁的升级原理是什么？</h2><p>…</p>
+<h2 id="什么是死锁？"><a href="#什么是死锁？" class="headerlink" title="什么是死锁？"></a>什么是死锁？</h2><p>指两个或两个以上的线程互相持有对方所需要的锁，导致这些线程一直处于等待状态，无法向下执行。</p>
+<h2 id="怎么防止死锁？"><a href="#怎么防止死锁？" class="headerlink" title="怎么防止死锁？"></a>怎么防止死锁？</h2><p>死锁的四个必要条件：</p>
+<pre><code>* 互斥条件：进程对所分配到的资源不允许其他进程进行访问，若其他进程访问该资源，只能等待，直至占有该资源的进程使用完成后释放该资源
+
+* 请求和保持条件：进程获得一定的资源之后，又对其他资源发出请求，但是该资源可能被其他进程占有，此事请求阻塞，但又对自己获得的资源保持不放
+
+* 不可剥夺条件：是指进程已获得的资源，在未完成使用之前，不可被剥夺，只能在使用完后自己释放
+
+* 环路等待条件：是指进程发生死锁后，若干进程之间形成一种头尾相接的循环等待资源关系</code></pre>
+<p>这四个条件是死锁的必要条件，只要系统发生死锁，这些条件必然成立，而只要上述条件之 一不满足，就不会发生死锁。</p>
+<p>理解了死锁的原因，尤其是产生死锁的四个必要条件，就可以最大可能地避免、预防和 解除死锁。<br>避免死锁的方式：<br>    * 加锁顺序（线程按照一定的顺序加锁）<br>    * 加锁时限（线程尝试获取锁的时候加上一定的时限，超过时限则放弃对该锁的请求，并释放自己占有的锁）<br>    * 死锁检测</p>
+<h2 id="ThreadLocal-是什么？有哪些使用场景？"><a href="#ThreadLocal-是什么？有哪些使用场景？" class="headerlink" title="ThreadLocal 是什么？有哪些使用场景？"></a>ThreadLocal 是什么？有哪些使用场景？</h2><p>ThreadLocal是维护线程内变量的类，该变量只能在当前线程访问，相对于其他线程是隔离的。例如可将JDBC的连接对象Connection放入ThreadLocal中。</p>
+<h2 id="说一下-synchronized-底层实现原理？"><a href="#说一下-synchronized-底层实现原理？" class="headerlink" title="说一下 synchronized 底层实现原理？"></a>说一下 synchronized 底层实现原理？</h2><ul>
+<li>普通同步方法：锁是当前对象。</li>
+<li>静态同步方法：锁是当前类。</li>
+<li>同步方法快：锁是括号中的对象。</li>
+</ul>
+<h2 id="synchronized-和-volatile-的区别是什么？"><a href="#synchronized-和-volatile-的区别是什么？" class="headerlink" title="synchronized 和 volatile 的区别是什么？"></a>synchronized 和 volatile 的区别是什么？</h2><ul>
+<li><p>volatile本质是告诉jvm当前变量在寄存器（工作内存）中的值是不确定的，需要从主存中读取；synchronize这是锁定当前变量，只有当前线程可以访问改变量。</p>
+</li>
+<li><p>volatile仅能使用在变量级别；synchronized则可以使用在变量、方法、和类级别的。</p>
+</li>
+<li><p>volatile仅能实现变量的修改可见性，不能保证原子性；而synchronized则可以保证变量的修改可见性和原子性。</p>
+</li>
+<li><p>volatile不会造成线程的阻塞；synchronized可能会造成线程的阻塞。</p>
+</li>
+<li><p>volatile标记的变量不会被编译器优化；synchronized标记的变量可以被编译器优化。</p>
+</li>
+</ul>
+<h2 id="synchronized-和-Lock-有什么区别？"><a href="#synchronized-和-Lock-有什么区别？" class="headerlink" title="synchronized 和 Lock 有什么区别？"></a>synchronized 和 Lock 有什么区别？</h2><p>首先synchronized是java内置关键字，在jvm层面，Lock是个java类；</p>
+<p>synchronized无法判断是否获取锁的状态，Lock可以判断是否获取到锁；</p>
+<p>synchronized会自动释放锁(a 线程执行完同步代码会释放锁 ；b 线程执行过程中发生异常会释放锁)，Lock需在finally中手工释放锁（unlock()方法释放锁），否则容易造成线程死锁；</p>
+<p>用synchronized关键字的两个线程1和线程2，如果当前线程1获得锁，线程2线程等待。如果线程1阻塞，线程2则会一直等待下去，而Lock锁就不一定会等待下去，如果尝试获取不到锁，线程可以不用一直等待就结束了；</p>
+<p>synchronized的锁可重入、不可中断、非公平，而Lock锁可重入、可判断、可公平（两者皆可）；</p>
+<p>Lock锁适合大量同步的代码的同步问题，synchronized锁适合代码少量的同步问题。</p>
+<h2 id="synchronized-和-ReentrantLock-区别是什么？"><a href="#synchronized-和-ReentrantLock-区别是什么？" class="headerlink" title="synchronized 和 ReentrantLock 区别是什么？"></a>synchronized 和 ReentrantLock 区别是什么？</h2><p>synchronized是和if、else、for、while一样的关键字，ReentrantLock是类，这是二者的本质区别。既然ReentrantLock是类，那么它就提供了比synchronized更多更灵活的特性，可以被继承、可以有方法、可以有各种各样的类变量，ReentrantLock比synchronized的扩展性体现在几点上： </p>
+<p>ReentrantLock可以对获取锁的等待时间进行设置，这样就避免了死锁 </p>
+<p>ReentrantLock可以获取各种锁的信息</p>
+<p>ReentrantLock可以灵活地实现多路通知 </p>
+<p>另外，二者的锁机制其实也是不一样的:ReentrantLock底层调用的是Unsafe的park方法加锁，synchronized操作的应该是对象头中mark word。</p>
+<h2 id="说一下-atomic-的原理？"><a href="#说一下-atomic-的原理？" class="headerlink" title="说一下 atomic 的原理？"></a>说一下 atomic 的原理？</h2><p>JDK Atomic开头的类，是通过 CAS 原理解决并发情况下原子性问题。</p>
+<p>CAS 包含 3 个参数，CAS(V, E, N)。V 表示需要更新的变量，E 表示变量当前期望值，N 表示更新为的值。只有当变量 V 的值等于 E 时，变量 V 的值才会被更新为 N。如果变量 V 的值不等于 E ，说明变量 V 的值已经被更新过，当前线程什么也不做，返回更新失败。</p>
+<p>当多个线程同时使用 CAS 更新一个变量时，只有一个线程可以更新成功，其他都失败。失败的线程不会被挂起，可以继续重试 CAS，也可以放弃操作。</p>
+<p>CAS 操作的原子性是通过 CPU 单条指令完成而保障的。JDK 中是通过 Unsafe 类中的 API 完成的。</p>
+<p>在并发量很高的情况，会有大量 CAS 更新失败，所以需要慎用。</p>
+<p>参考博文：<a href="https://blog.csdn.net/fangchao2011/article/details/89203535">最新Java面试题，常见面试题及答案汇总</a></p>
 ]]></content>
       <tags>
         <tag>java</tag>
@@ -185,6 +262,42 @@
       </categories>
       <tags>
         <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux笔记</title>
+    <url>/linux-note/</url>
+    <content><![CDATA[<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><h3 id="apt软件卸载"><a href="#apt软件卸载" class="headerlink" title="apt软件卸载"></a>apt软件卸载</h3><pre><code>apt-get purge / apt-get –purge remove </code></pre>
+<p>删除已安装包（不保留配置文件)。<br>如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件</p>
+<pre><code>apt-get autoremove </code></pre>
+<p>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。</p>
+<pre><code>apt-get remove </code></pre>
+<p>删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。</p>
+<pre><code>apt-get autoclean </code></pre>
+<p>APT的底层包是dpkg, 而dpkg 安装Package时, 会将 *.deb 放在 /var/cache/apt/archives/中，apt-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。</p>
+<pre><code>apt-get clean </code></pre>
+<p>使用 apt-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/*.deb。</p>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h3><pre><code>set number 
+set ts=4
+set expandtab
+set autoindent
+set softtabstop=4 
+set shiftwidth=4</code></pre>
+<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="多行编辑"><a href="#多行编辑" class="headerlink" title="多行编辑"></a>多行编辑</h4><ol>
+<li>在命令行模式按Ctrl+V进入块模式</li>
+<li>利用上下左右键选择需要编辑多少行、从哪开始</li>
+<li>输入大写字母“I”进入插入模式</li>
+<li>编辑行</li>
+<li>再次按Esc键回到命令行模式即可完成多行编辑</li>
+</ol>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>全局替换a为b<br>    :%s/a/b/g</p>
+<h2 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h2><p>杀死包含某关键字的所以进程<br>    ps -ef | grep param | grep -v grep | cut -c 9-15 | xargs kill -9<br>    或<br>    ps x | grep param | grep -v grep | awk ‘{print $1}’ | xargs kill -9</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux apt vim</tag>
       </tags>
   </entry>
   <entry>
@@ -293,42 +406,6 @@ redis-cli -p 27002 shutdown</code></pre>
 ]]></content>
       <tags>
         <tag>resource</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux笔记</title>
-    <url>/linux-note/</url>
-    <content><![CDATA[<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><h3 id="apt软件卸载"><a href="#apt软件卸载" class="headerlink" title="apt软件卸载"></a>apt软件卸载</h3><pre><code>apt-get purge / apt-get –purge remove </code></pre>
-<p>删除已安装包（不保留配置文件)。<br>如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件</p>
-<pre><code>apt-get autoremove </code></pre>
-<p>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。</p>
-<pre><code>apt-get remove </code></pre>
-<p>删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。</p>
-<pre><code>apt-get autoclean </code></pre>
-<p>APT的底层包是dpkg, 而dpkg 安装Package时, 会将 *.deb 放在 /var/cache/apt/archives/中，apt-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。</p>
-<pre><code>apt-get clean </code></pre>
-<p>使用 apt-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/*.deb。</p>
-<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h3><pre><code>set number 
-set ts=4
-set expandtab
-set autoindent
-set softtabstop=4 
-set shiftwidth=4</code></pre>
-<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="多行编辑"><a href="#多行编辑" class="headerlink" title="多行编辑"></a>多行编辑</h4><ol>
-<li>在命令行模式按Ctrl+V进入块模式</li>
-<li>利用上下左右键选择需要编辑多少行、从哪开始</li>
-<li>输入大写字母“I”进入插入模式</li>
-<li>编辑行</li>
-<li>再次按Esc键回到命令行模式即可完成多行编辑</li>
-</ol>
-<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>全局替换a为b<br>    :%s/a/b/g</p>
-<h2 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h2><p>杀死包含某关键字的所以进程<br>    ps -ef | grep param | grep -v grep | cut -c 9-15 | xargs kill -9<br>    或<br>    ps x | grep param | grep -v grep | awk ‘{print $1}’ | xargs kill -9</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux apt vim</tag>
       </tags>
   </entry>
 </search>
