@@ -57,7 +57,64 @@
 <li>read</li>
 <li>write</li>
 </ul>
-<p>参考博文：<a href="https://blog.csdn.net/fangchao2011/article/details/89203535">最新Java面试题，常见面试题及答案汇总</a></p>
+<h1 id="Java容器"><a href="#Java容器" class="headerlink" title="Java容器"></a>Java容器</h1><h2 id="java-容器都有哪些？"><a href="#java-容器都有哪些？" class="headerlink" title="java 容器都有哪些？"></a>java 容器都有哪些？</h2><ul>
+<li><p>List</p>
+<ol>
+<li>ArrayList</li>
+<li>LinkedList</li>
+<li>Vector</li>
+<li>CopyOnWriteArrayList</li>
+</ol>
+</li>
+<li><p>Queue</p>
+<ul>
+<li>非阻塞队列<ol>
+<li>LinkedList</li>
+<li>PriorityQueue</li>
+<li>ConcurrentLnkedQueue</li>
+</ol>
+</li>
+<li>阻塞队列<ol>
+<li>ArrayBlockingQueue</li>
+<li>LinkedBlockingQueue</li>
+<li>PriorityBlockingQueue</li>
+<li>DelayQueue</li>
+<li>SynchronousQueue</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>Map</p>
+<ol>
+<li>HashMap</li>
+<li>LinkedHashMap</li>
+<li>HashTable</li>
+<li>TreeMap</li>
+<li>ConCurrentHashMap</li>
+</ol>
+</li>
+<li><p>Set</p>
+<ol>
+<li>HashSet</li>
+<li>LinkedHashSet</li>
+<li>TreeSet</li>
+</ol>
+</li>
+</ul>
+<h2 id="Collection-和-Collections-有什么区别？"><a href="#Collection-和-Collections-有什么区别？" class="headerlink" title="Collection 和 Collections 有什么区别？"></a>Collection 和 Collections 有什么区别？</h2><p>Collection是集合的顶级接口，Collections是集合的一个工具类，提供了对集合进行排序、搜索以及线程安全操作等方法。</p>
+<h2 id="HashMap-和-Hashtable-有什么区别？"><a href="#HashMap-和-Hashtable-有什么区别？" class="headerlink" title="HashMap 和 Hashtable 有什么区别？"></a>HashMap 和 Hashtable 有什么区别？</h2><ol>
+<li>HashTable是线程安全的，但是效率比HashMap低。</li>
+<li>HashMap允许空键值，而HashTable不允许。</li>
+</ol>
+<h2 id="如何决定使用-HashMap-还是-TreeMap？"><a href="#如何决定使用-HashMap-还是-TreeMap？" class="headerlink" title="如何决定使用 HashMap 还是 TreeMap？"></a>如何决定使用 HashMap 还是 TreeMap？</h2><p>如果需要对一个有序的key集合进行排序操作，则选择TreeMap，否则选择HashMap。</p>
+<h2 id="说一下-HashMap-的实现原理？"><a href="#说一下-HashMap-的实现原理？" class="headerlink" title="说一下 HashMap 的实现原理？"></a>说一下 HashMap 的实现原理？</h2><p>HashMap实际上是一个数组和链表的结合体。当我们往HashMap中put元素时，它首先会根据key的hashcode计算hash值，然后根据hash值得到这个元素在数组中的位置。如果该位置没有元素，则直接将该元素放到数组的该位置上。如果该位置已经有了其他元素，这种情况就叫hash冲突，HashMap会将这个位置上的元素以链表的形式存放，jdk1.8中以尾插法的方式插入元素，如果链表中的元素超过8个，该链表会转为红黑树来提高查询效率。</p>
+<h2 id="说一下-HashSet-的实现原理？"><a href="#说一下-HashSet-的实现原理？" class="headerlink" title="说一下 HashSet 的实现原理？"></a>说一下 HashSet 的实现原理？</h2><p>HashSet的底层由HashMap实现，它的值存在HashMap的key上，HashMap的value统一为PRESENT。</p>
+<h2 id="ArrayList-和-LinkedList-的区别是什么？"><a href="#ArrayList-和-LinkedList-的区别是什么？" class="headerlink" title="ArrayList 和 LinkedList 的区别是什么？"></a>ArrayList 和 LinkedList 的区别是什么？</h2><p>ArrayList底层数据结构是数组，支持随机访问。LinkedList底层是双向循环链表。ArrayList查找元素时，时间复杂度为O(1),LinkedList为O(n)。</p>
+<h2 id="如何实现数组和-List-之间的转换？"><a href="#如何实现数组和-List-之间的转换？" class="headerlink" title="如何实现数组和 List 之间的转换？"></a>如何实现数组和 List 之间的转换？</h2><ul>
+<li>List转数组：调用List的toArray方法。</li>
+<li>数组转List：调用Arrays的asList方法。</li>
+</ul>
+<h2 id="ArrayList-和-Vector-的区别是什么？"><a href="#ArrayList-和-Vector-的区别是什么？" class="headerlink" title="ArrayList 和 Vector 的区别是什么？"></a>ArrayList 和 Vector 的区别是什么？</h2><h2 id="Array-和-ArrayList-有何区别？"><a href="#Array-和-ArrayList-有何区别？" class="headerlink" title="Array 和 ArrayList 有何区别？"></a>Array 和 ArrayList 有何区别？</h2><h2 id="在-Queue-中-poll-和-remove-有什么区别？"><a href="#在-Queue-中-poll-和-remove-有什么区别？" class="headerlink" title="在 Queue 中 poll()和 remove()有什么区别？"></a>在 Queue 中 poll()和 remove()有什么区别？</h2><h2 id="哪些集合类是线程安全的？"><a href="#哪些集合类是线程安全的？" class="headerlink" title="哪些集合类是线程安全的？"></a>哪些集合类是线程安全的？</h2><h2 id="迭代器-Iterator-是什么？"><a href="#迭代器-Iterator-是什么？" class="headerlink" title="迭代器 Iterator 是什么？"></a>迭代器 Iterator 是什么？</h2><h2 id="Iterator-怎么使用？有什么特点？"><a href="#Iterator-怎么使用？有什么特点？" class="headerlink" title="Iterator 怎么使用？有什么特点？"></a>Iterator 怎么使用？有什么特点？</h2><h2 id="Iterator-和-ListIterator-有什么区别？"><a href="#Iterator-和-ListIterator-有什么区别？" class="headerlink" title="Iterator 和 ListIterator 有什么区别？"></a>Iterator 和 ListIterator 有什么区别？</h2><h2 id="怎么确保一个集合不能被修改？"><a href="#怎么确保一个集合不能被修改？" class="headerlink" title="怎么确保一个集合不能被修改？"></a>怎么确保一个集合不能被修改？</h2><p>参考博文：<a href="https://blog.csdn.net/fangchao2011/article/details/89203535">最新Java面试题，常见面试题及答案汇总</a></p>
 ]]></content>
       <tags>
         <tag>java</tag>
@@ -97,6 +154,27 @@ set shiftwidth=4</code></pre>
       </categories>
       <tags>
         <tag>linux apt vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown语法</title>
+    <url>/markdown/</url>
+    <content><![CDATA[<h1 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，其编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档，编写的文档后缀为 .md, .markdown。</p>
+<h2 id="Markdown块级元素"><a href="#Markdown块级元素" class="headerlink" title="Markdown块级元素"></a>Markdown块级元素</h2><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><h4 id="Setext样式"><a href="#Setext样式" class="headerlink" title="Setext样式"></a>Setext样式</h4><p>在标题底下使用<code>=</code>和<code>-</code>分别表示一级标题和二级标题</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">一级标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">二级标题</span><br><span class="line">-------------</span><br></pre></td></tr></table></figure>
+
+<h4 id="Atx样式"><a href="#Atx样式" class="headerlink" title="Atx样式"></a>Atx样式</h4><p>每行开头使用1-6个<code>#</code>号来表示1-6级标题。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">依次类推...</span><br></pre></td></tr></table></figure>
+
+<h3 id="块引用"><a href="#块引用" class="headerlink" title="块引用"></a>块引用</h3><p>使用<code>&gt;</code>字符作为块引用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; Helloaaaaaaaaaaaaaaaaa</span><br><span class="line">&gt; aaaaaa</span><br><span class="line">&gt; aaaaaaaaaaaa</span><br><span class="line">&gt; aaaaaaaaaaaa</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Markdown</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -205,27 +283,6 @@ redis-cli -p 27002 shutdown</code></pre>
 ]]></content>
       <tags>
         <tag>resource</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Markdown语法</title>
-    <url>/markdown/</url>
-    <content><![CDATA[<h1 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，其编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档，编写的文档后缀为 .md, .markdown。</p>
-<h2 id="Markdown块级元素"><a href="#Markdown块级元素" class="headerlink" title="Markdown块级元素"></a>Markdown块级元素</h2><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><h4 id="Setext样式"><a href="#Setext样式" class="headerlink" title="Setext样式"></a>Setext样式</h4><p>在标题底下使用<code>=</code>和<code>-</code>分别表示一级标题和二级标题</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">一级标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">二级标题</span><br><span class="line">-------------</span><br></pre></td></tr></table></figure>
-
-<h4 id="Atx样式"><a href="#Atx样式" class="headerlink" title="Atx样式"></a>Atx样式</h4><p>每行开头使用1-6个<code>#</code>号来表示1-6级标题。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">依次类推...</span><br></pre></td></tr></table></figure>
-
-<h3 id="块引用"><a href="#块引用" class="headerlink" title="块引用"></a>块引用</h3><p>使用<code>&gt;</code>字符作为块引用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; Helloaaaaaaaaaaaaaaaaa</span><br><span class="line">&gt; aaaaaa</span><br><span class="line">&gt; aaaaaaaaaaaa</span><br><span class="line">&gt; aaaaaaaaaaaa</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Markdown</category>
-      </categories>
-      <tags>
-        <tag>Markdown</tag>
       </tags>
   </entry>
 </search>
