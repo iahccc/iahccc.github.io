@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.iahc.top/linux-note/</loc>
+    
+    <lastmod>2021-01-31</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.iahc.top/resource-collection/</loc>
     
     <lastmod>2021-01-27</lastmod>
@@ -16,7 +23,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/linux-note/</loc>
+    <loc>https://blog.iahc.top/markdown/</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -30,7 +37,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/markdown/</loc>
+    <loc>https://blog.iahc.top/music.html</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -44,7 +51,7 @@
   </url>
   
   <url>
-    <loc>https://blog.iahc.top/music.html</loc>
+    <loc>https://blog.iahc.top/mylogs/index.html</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -52,13 +59,6 @@
   
   <url>
     <loc>https://blog.iahc.top/categories/index.html</loc>
-    
-    <lastmod>2020-12-11</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.iahc.top/mylogs/index.html</loc>
     
     <lastmod>2020-12-11</lastmod>
     
@@ -74,7 +74,7 @@
 
   <url>
     <loc>https://blog.iahc.top/</loc>
-    <lastmod>2021-01-27</lastmod>
+    <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -82,35 +82,35 @@
   
   <url>
     <loc>https://blog.iahc.top/tags/java/</loc>
-    <lastmod>2021-01-27</lastmod>
+    <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://blog.iahc.top/tags/linux-apt-vim/</loc>
-    <lastmod>2021-01-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.iahc.top/tags/redis/</loc>
-    <lastmod>2021-01-27</lastmod>
+    <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://blog.iahc.top/tags/Markdown/</loc>
-    <lastmod>2021-01-27</lastmod>
+    <lastmod>2021-01-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iahc.top/tags/redis/</loc>
+    <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://blog.iahc.top/tags/resource/</loc>
-    <lastmod>2021-01-27</lastmod>
+    <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -119,21 +119,21 @@
   
   <url>
     <loc>https://blog.iahc.top/categories/linux/</loc>
-    <lastmod>2021-01-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.iahc.top/categories/redis/</loc>
-    <lastmod>2021-01-27</lastmod>
+    <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://blog.iahc.top/categories/Markdown/</loc>
-    <lastmod>2021-01-27</lastmod>
+    <lastmod>2021-01-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.iahc.top/categories/redis/</loc>
+    <lastmod>2021-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
