@@ -1,157 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>linux笔记</title>
-    <url>/linux-note/</url>
-    <content><![CDATA[<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><h3 id="apt软件卸载"><a href="#apt软件卸载" class="headerlink" title="apt软件卸载"></a>apt软件卸载</h3><pre><code>apt-get purge / apt-get –purge remove </code></pre>
-<p>删除已安装包（不保留配置文件)。<br>如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件</p>
-<pre><code>apt-get autoremove </code></pre>
-<p>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。</p>
-<pre><code>apt-get remove </code></pre>
-<p>删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。</p>
-<pre><code>apt-get autoclean </code></pre>
-<p>APT的底层包是dpkg, 而dpkg 安装Package时, 会将 *.deb 放在 /var/cache/apt/archives/中，apt-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。</p>
-<pre><code>apt-get clean </code></pre>
-<p>使用 apt-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/*.deb。</p>
-<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h3><pre><code>set number
-set ts=4
-set expandtab
-set autoindent
-set softtabstop=4
-set shiftwidth=4
-inoremap jk &lt;esc&gt;
-
-set fileformats=unix
-set enc=utf-8
-set fenc=utf-8</code></pre>
-<h3 id="gvim配置"><a href="#gvim配置" class="headerlink" title="gvim配置"></a>gvim配置</h3><pre><code>set smartindent   &quot;设置智能缩进
-set shortmess=atI &quot;去掉欢迎界面
-colorscheme slate   &quot;sublime的配色方案
-set guifont=Consolas:h12    &quot;字体与字号
-set langmenu=zh_CN.UTF-8    &quot;设置菜单语言
-source $VIMRUNTIME/delmenu.vim  &quot;导入删除菜单脚本，删除乱码的菜单
-source $VIMRUNTIME/menu.vim &quot;导入正常的菜单脚本
-language messages zh_CN.utf-8   &quot;设置提示信息语言
-
-&quot;set guioptions-=m   &quot;去除菜单栏 
-set guioptions-=T   &quot;去除工具栏</code></pre>
-<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="多行编辑"><a href="#多行编辑" class="headerlink" title="多行编辑"></a>多行编辑</h4><ol>
-<li>在命令行模式按Ctrl+V进入块模式</li>
-<li>利用上下左右键选择需要编辑多少行、从哪开始</li>
-<li>输入大写字母“I”进入插入模式</li>
-<li>编辑行</li>
-<li>再次按Esc键回到命令行模式即可完成多行编辑</li>
-</ol>
-<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>全局替换a为b<br>    :%s/a/b/g</p>
-<h2 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h2><p>杀死包含某关键字的所以进程<br>    ps -ef | grep param | grep -v grep | cut -c 9-15 | xargs kill -9<br>    或<br>    ps x | grep param | grep -v grep | awk ‘{print $1}’ | xargs kill -9</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux apt vim</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis笔记</title>
-    <url>/redis-note/</url>
-    <content><![CDATA[<h1 id="Redis编译安装"><a href="#Redis编译安装" class="headerlink" title="Redis编译安装"></a>Redis编译安装</h1><h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><pre><code>wget *redis安装包url*  
-
-tar -zxvf *redis安装包路径*  
-
-cd *redis解压包路径*  
-
-sudo mkdir /usr/local/redis  
-
-sudo make  
-
-sudo make PREFIX=/usr/local/redis install  
-
-sudo mkdir /usr/local/redis/etc  
-
-sudo cp redis.conf /usr/local/redis/etc/  </code></pre>
-<h2 id="设置redis以守护进程方式运行"><a href="#设置redis以守护进程方式运行" class="headerlink" title="设置redis以守护进程方式运行"></a>设置redis以守护进程方式运行</h2><p>将/usr/local/redis/etc/redis.conf文件中的daemonize改为yes</p>
-<h2 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h2><pre><code># 如果提示权限不足,则先运行 su 命令进入管理员模式，再输入该语句。
-sudo echo &#39;export PATH=&quot;$PATH:/usr/local/redis/bin&quot;&#39; &gt;&gt; /etc/profile   
-source /etc/profile</code></pre>
-<h2 id="Redis高可用方案"><a href="#Redis高可用方案" class="headerlink" title="Redis高可用方案"></a>Redis高可用方案</h2><p>Redis高可用常见的几种方式：</p>
-<ul>
-<li>Redis复制(Replication)和哨兵(Sentinel)机制</li>
-<li>Redis集群(Redis-cluster模式)</li>
-</ul>
-<h3 id="Redis复制-Replication-和哨兵-Sentinel-机制"><a href="#Redis复制-Replication-和哨兵-Sentinel-机制" class="headerlink" title="Redis复制(Replication)和哨兵(Sentinel)机制"></a>Redis复制(Replication)和哨兵(Sentinel)机制</h3><h4 id="Replication工作原理"><a href="#Replication工作原理" class="headerlink" title="Replication工作原理"></a>Replication工作原理</h4><p><em>todo</em></p>
-<h4 id="Sentinel工作原理"><a href="#Sentinel工作原理" class="headerlink" title="Sentinel工作原理"></a>Sentinel工作原理</h4><p><em>todo</em></p>
-<h4 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h4><p>将redis.conf文件复制为redis-master-7000.conf、redis-slave-7001.conf、redis-slave-7002.conf并修改(文件名以端口号结尾)</p>
-<pre><code># 服务器端口号，主从分别修改为7000/7001/7002
-port &lt;端口号&gt;
-# 使得Redis可以跨网络访问 
-bind 0.0.0.0 
-# 配置reids的密码 
-requirepass &quot;111111&quot; 
-
-# 下面两个配置只需要配置从节点(slave) 
-# 配置主服务器地址、端口号 
-replicaof 127.0.0.1 7001 
-# 主服务器密码 
-masterauth &quot;111111&quot;</code></pre>
-<p>分别启动三个Redis服务</p>
-<pre><code>redis-server /usr/local/redis/etc/redis-master-7000.conf
-redis-server /usr/local/redis/etc/redis-slave-7001.conf
-redis-server /usr/local/redis/etc/redis-slave-7002.conf</code></pre>
-<p>使用redis-cli工具连接redis服务查看主从节点是否搭建成功</p>
-<pre><code>redis-cli -h &lt;主机名&gt; -p &lt;端口号&gt;</code></pre>
-<p>验证密码后输入进行验证<br>    info replication</p>
-<p>接下来配置哨兵Sentinel。</p>
-<p>将sentinel.conf文件复制为sentinel-27000.conf、sentinel-27001.conf、sentinel-27002.conf(文件名以端口号结尾)并修改<strong>(注意文件权限问题，需要给用户写权限)</strong></p>
-<pre><code># 三个配置文件分别配置不同的端口号
-port &lt;端口号&gt;
-# 设置为后台启动
-daemonize yes
-# 主节点的名称(可以自定义，与后面的配置保持一致即可)
-# 主机地址
-# 端口号
-# 数量(2代表只有两个或两个以上的哨兵认为主服务器不可用的时候，才会进行failover操作)
-sentinel monitor mymaster 127.0.0.1 6379 2
-# 多长时间没有响应认为主观下线(SDOWN)
-sentinel down-after-milliseconds mymaster 60000
-# 表示如果15秒后,mysater仍没活过来，则启动failover，从剩下从节点序曲新的主节点
-sentinel failover-timeout mymaster 15000
-# 指定了在执行故障转移时， 最多可以有多少个从服务器同时对新的主服务器进行同步， 这个数字越小， 完成故障转移所需的时间就越长
-sentinel parallel-syncs mymaster 1</code></pre>
-<p>启动三个Sentinel</p>
-<pre><code>redis-sentinel /usr/local/redis/etc/sentinel-27000.conf
-redis-sentinel /usr/local/redis/etc/sentinel-27001.conf
-redis-sentinel /usr/local/redis/etc/sentinel-27002.conf</code></pre>
-<p>然后手动关闭主节点的redis服务，并查看两个slave信息是否有一个变成了master。</p>
-<h4 id="配置以脚本方式启动"><a href="#配置以脚本方式启动" class="headerlink" title="配置以脚本方式启动"></a>配置以脚本方式启动</h4><p>在redis的bin目录下新建redis-replication-sentinel-startup.sh和redis-replication-sentinel-shutdown.sh<br>startup.sh内容如下:</p>
-<pre><code>redis-server /usr/local/redis/etc/redis-master-7000.conf
-redis-server /usr/local/redis/etc/redis-slave-7001.conf
-redis-server /usr/local/redis/etc/redis-slave-7002.conf
-
-redis-sentinel /usr/local/redis/etc/sentinel-27000.conf
-redis-sentinel /usr/local/redis/etc/sentinel-27001.conf
-redis-sentinel /usr/local/redis/etc/sentinel-27002.conf
-echo started。。。。。。。</code></pre>
-<p>shutdown.sh内容如下:</p>
-<pre><code>redis-cli -p 7000 shutdown
-redis-cli -p 7001 shutdown
-redis-cli -p 7002 shutdown
-
-redis-cli -p 27000 shutdown
-redis-cli -p 27001 shutdown
-redis-cli -p 27002 shutdown</code></pre>
-<p>为两个文件添加可执行权限:</p>
-<pre><code>sudo chmod +x &lt;filename&gt;</code></pre>
-<p>参考链接:<a href="https://www.jianshu.com/p/7d5fbf90bcd7">Redis高可用方案</a><br>未完待续。。。</p>
-]]></content>
-      <categories>
-        <category>redis</category>
-      </categories>
-      <tags>
-        <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java笔记</title>
     <url>/java-note/</url>
     <content><![CDATA[<h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="“-”和equals有什么区别？"><a href="#“-”和equals有什么区别？" class="headerlink" title="“==”和equals有什么区别？"></a>“==”和equals有什么区别？</h2><ol>
@@ -395,6 +244,69 @@ redis-cli -p 27002 shutdown</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>java-todo</title>
+    <url>/java-todo/</url>
+    <content><![CDATA[<h1 id="Java待学习-了解"><a href="#Java待学习-了解" class="headerlink" title="Java待学习/了解"></a>Java待学习/了解</h1><h2 id="Random-gt-ThreadLocalRandom"><a href="#Random-gt-ThreadLocalRandom" class="headerlink" title="Random ==&gt; ThreadLocalRandom"></a>Random ==&gt; ThreadLocalRandom</h2>]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux笔记</title>
+    <url>/linux-note/</url>
+    <content><![CDATA[<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><h3 id="apt软件卸载"><a href="#apt软件卸载" class="headerlink" title="apt软件卸载"></a>apt软件卸载</h3><pre><code>apt-get purge / apt-get –purge remove </code></pre>
+<p>删除已安装包（不保留配置文件)。<br>如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件</p>
+<pre><code>apt-get autoremove </code></pre>
+<p>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。</p>
+<pre><code>apt-get remove </code></pre>
+<p>删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。</p>
+<pre><code>apt-get autoclean </code></pre>
+<p>APT的底层包是dpkg, 而dpkg 安装Package时, 会将 *.deb 放在 /var/cache/apt/archives/中，apt-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。</p>
+<pre><code>apt-get clean </code></pre>
+<p>使用 apt-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/*.deb。</p>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h3><pre><code>set number
+set ts=4
+set expandtab
+set autoindent
+set softtabstop=4
+set shiftwidth=4
+inoremap jk &lt;esc&gt;
+
+set fileformats=unix
+set enc=utf-8
+set fenc=utf-8</code></pre>
+<h3 id="gvim配置"><a href="#gvim配置" class="headerlink" title="gvim配置"></a>gvim配置</h3><pre><code>set smartindent   &quot;设置智能缩进
+set shortmess=atI &quot;去掉欢迎界面
+colorscheme slate   &quot;sublime的配色方案
+set guifont=Consolas:h12    &quot;字体与字号
+set langmenu=zh_CN.UTF-8    &quot;设置菜单语言
+source $VIMRUNTIME/delmenu.vim  &quot;导入删除菜单脚本，删除乱码的菜单
+source $VIMRUNTIME/menu.vim &quot;导入正常的菜单脚本
+language messages zh_CN.utf-8   &quot;设置提示信息语言
+
+&quot;set guioptions-=m   &quot;去除菜单栏 
+set guioptions-=T   &quot;去除工具栏</code></pre>
+<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="多行编辑"><a href="#多行编辑" class="headerlink" title="多行编辑"></a>多行编辑</h4><ol>
+<li>在命令行模式按Ctrl+V进入块模式</li>
+<li>利用上下左右键选择需要编辑多少行、从哪开始</li>
+<li>输入大写字母“I”进入插入模式</li>
+<li>编辑行</li>
+<li>再次按Esc键回到命令行模式即可完成多行编辑</li>
+</ol>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>全局替换a为b<br>    :%s/a/b/g</p>
+<h2 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h2><p>杀死包含某关键字的所以进程<br>    ps -ef | grep param | grep -v grep | cut -c 9-15 | xargs kill -9<br>    或<br>    ps x | grep param | grep -v grep | awk ‘{print $1}’ | xargs kill -9</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux apt vim</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown语法</title>
     <url>/markdown/</url>
     <content><![CDATA[<h1 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，其编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档，编写的文档后缀为 .md, .markdown。</p>
@@ -413,6 +325,105 @@ redis-cli -p 27002 shutdown</code></pre>
       </categories>
       <tags>
         <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis笔记</title>
+    <url>/redis-note/</url>
+    <content><![CDATA[<h1 id="Redis编译安装"><a href="#Redis编译安装" class="headerlink" title="Redis编译安装"></a>Redis编译安装</h1><h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><pre><code>wget *redis安装包url*  
+
+tar -zxvf *redis安装包路径*  
+
+cd *redis解压包路径*  
+
+sudo mkdir /usr/local/redis  
+
+sudo make  
+
+sudo make PREFIX=/usr/local/redis install  
+
+sudo mkdir /usr/local/redis/etc  
+
+sudo cp redis.conf /usr/local/redis/etc/  </code></pre>
+<h2 id="设置redis以守护进程方式运行"><a href="#设置redis以守护进程方式运行" class="headerlink" title="设置redis以守护进程方式运行"></a>设置redis以守护进程方式运行</h2><p>将/usr/local/redis/etc/redis.conf文件中的daemonize改为yes</p>
+<h2 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h2><pre><code># 如果提示权限不足,则先运行 su 命令进入管理员模式，再输入该语句。
+sudo echo &#39;export PATH=&quot;$PATH:/usr/local/redis/bin&quot;&#39; &gt;&gt; /etc/profile   
+source /etc/profile</code></pre>
+<h2 id="Redis高可用方案"><a href="#Redis高可用方案" class="headerlink" title="Redis高可用方案"></a>Redis高可用方案</h2><p>Redis高可用常见的几种方式：</p>
+<ul>
+<li>Redis复制(Replication)和哨兵(Sentinel)机制</li>
+<li>Redis集群(Redis-cluster模式)</li>
+</ul>
+<h3 id="Redis复制-Replication-和哨兵-Sentinel-机制"><a href="#Redis复制-Replication-和哨兵-Sentinel-机制" class="headerlink" title="Redis复制(Replication)和哨兵(Sentinel)机制"></a>Redis复制(Replication)和哨兵(Sentinel)机制</h3><h4 id="Replication工作原理"><a href="#Replication工作原理" class="headerlink" title="Replication工作原理"></a>Replication工作原理</h4><p><em>todo</em></p>
+<h4 id="Sentinel工作原理"><a href="#Sentinel工作原理" class="headerlink" title="Sentinel工作原理"></a>Sentinel工作原理</h4><p><em>todo</em></p>
+<h4 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h4><p>将redis.conf文件复制为redis-master-7000.conf、redis-slave-7001.conf、redis-slave-7002.conf并修改(文件名以端口号结尾)</p>
+<pre><code># 服务器端口号，主从分别修改为7000/7001/7002
+port &lt;端口号&gt;
+# 使得Redis可以跨网络访问 
+bind 0.0.0.0 
+# 配置reids的密码 
+requirepass &quot;111111&quot; 
+
+# 下面两个配置只需要配置从节点(slave) 
+# 配置主服务器地址、端口号 
+replicaof 127.0.0.1 7001 
+# 主服务器密码 
+masterauth &quot;111111&quot;</code></pre>
+<p>分别启动三个Redis服务</p>
+<pre><code>redis-server /usr/local/redis/etc/redis-master-7000.conf
+redis-server /usr/local/redis/etc/redis-slave-7001.conf
+redis-server /usr/local/redis/etc/redis-slave-7002.conf</code></pre>
+<p>使用redis-cli工具连接redis服务查看主从节点是否搭建成功</p>
+<pre><code>redis-cli -h &lt;主机名&gt; -p &lt;端口号&gt;</code></pre>
+<p>验证密码后输入进行验证<br>    info replication</p>
+<p>接下来配置哨兵Sentinel。</p>
+<p>将sentinel.conf文件复制为sentinel-27000.conf、sentinel-27001.conf、sentinel-27002.conf(文件名以端口号结尾)并修改<strong>(注意文件权限问题，需要给用户写权限)</strong></p>
+<pre><code># 三个配置文件分别配置不同的端口号
+port &lt;端口号&gt;
+# 设置为后台启动
+daemonize yes
+# 主节点的名称(可以自定义，与后面的配置保持一致即可)
+# 主机地址
+# 端口号
+# 数量(2代表只有两个或两个以上的哨兵认为主服务器不可用的时候，才会进行failover操作)
+sentinel monitor mymaster 127.0.0.1 6379 2
+# 多长时间没有响应认为主观下线(SDOWN)
+sentinel down-after-milliseconds mymaster 60000
+# 表示如果15秒后,mysater仍没活过来，则启动failover，从剩下从节点序曲新的主节点
+sentinel failover-timeout mymaster 15000
+# 指定了在执行故障转移时， 最多可以有多少个从服务器同时对新的主服务器进行同步， 这个数字越小， 完成故障转移所需的时间就越长
+sentinel parallel-syncs mymaster 1</code></pre>
+<p>启动三个Sentinel</p>
+<pre><code>redis-sentinel /usr/local/redis/etc/sentinel-27000.conf
+redis-sentinel /usr/local/redis/etc/sentinel-27001.conf
+redis-sentinel /usr/local/redis/etc/sentinel-27002.conf</code></pre>
+<p>然后手动关闭主节点的redis服务，并查看两个slave信息是否有一个变成了master。</p>
+<h4 id="配置以脚本方式启动"><a href="#配置以脚本方式启动" class="headerlink" title="配置以脚本方式启动"></a>配置以脚本方式启动</h4><p>在redis的bin目录下新建redis-replication-sentinel-startup.sh和redis-replication-sentinel-shutdown.sh<br>startup.sh内容如下:</p>
+<pre><code>redis-server /usr/local/redis/etc/redis-master-7000.conf
+redis-server /usr/local/redis/etc/redis-slave-7001.conf
+redis-server /usr/local/redis/etc/redis-slave-7002.conf
+
+redis-sentinel /usr/local/redis/etc/sentinel-27000.conf
+redis-sentinel /usr/local/redis/etc/sentinel-27001.conf
+redis-sentinel /usr/local/redis/etc/sentinel-27002.conf
+echo started。。。。。。。</code></pre>
+<p>shutdown.sh内容如下:</p>
+<pre><code>redis-cli -p 7000 shutdown
+redis-cli -p 7001 shutdown
+redis-cli -p 7002 shutdown
+
+redis-cli -p 27000 shutdown
+redis-cli -p 27001 shutdown
+redis-cli -p 27002 shutdown</code></pre>
+<p>为两个文件添加可执行权限:</p>
+<pre><code>sudo chmod +x &lt;filename&gt;</code></pre>
+<p>参考链接:<a href="https://www.jianshu.com/p/7d5fbf90bcd7">Redis高可用方案</a><br>未完待续。。。</p>
+]]></content>
+      <categories>
+        <category>redis</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
       </tags>
   </entry>
   <entry>
