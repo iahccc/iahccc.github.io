@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.iahc.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Java基础“&#x3D;&#x3D;”和equals有什么区别？ “&#x3D;&#x3D;”对于基本类型来说比较的是值是否相同，对于引用类型来说比较多是引用的地址是否相同。  equals本质上就是“&#x3D;&#x3D;”，比较的是引用，String、Integer等类重写了equals方法使其变成了值比较。   两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？错误，两个不相同的对象有可能会发生hash冲突。 f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java笔记">
+<meta property="og:url" content="https://blog.iahc.top/java-note/index.html">
+<meta property="og:site_name" content="Iahc&#39;s Blog">
+<meta property="og:description" content="Java基础“&#x3D;&#x3D;”和equals有什么区别？ “&#x3D;&#x3D;”对于基本类型来说比较的是值是否相同，对于引用类型来说比较多是引用的地址是否相同。  equals本质上就是“&#x3D;&#x3D;”，比较的是引用，String、Integer等类重写了equals方法使其变成了值比较。   两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？错误，两个不相同的对象有可能会发生hash冲突。 f">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-12T03:05:07.000Z">
+<meta property="article:modified_time" content="2021-10-19T06:33:28.848Z">
+<meta property="article:author" content="iahc">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.iahc.top/java-note/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java笔记 | Iahc's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Iahc's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Iahc's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.iahc.top/java-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iahc">
+      <meta itemprop="description" content="Iahc's Blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Iahc's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-12 11:05:07" itemprop="dateCreated datePublished" datetime="2020-12-12T11:05:07+08:00">2020-12-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-19 14:33:28" itemprop="dateModified" datetime="2021-10-19T14:33:28+08:00">2021-10-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="“-”和equals有什么区别？"><a href="#“-”和equals有什么区别？" class="headerlink" title="“==”和equals有什么区别？"></a>“==”和equals有什么区别？</h2><ol>
+<li><p>“==”对于基本类型来说比较的是值是否相同，对于引用类型来说比较多是引用的地址是否相同。</p>
+</li>
+<li><p>equals本质上就是“==”，比较的是引用，String、Integer等类重写了equals方法使其变成了值比较。</p>
+</li>
+</ol>
+<h2 id="两个对象的-hashCode-相同，则-equals-也一定为-true，对吗？"><a href="#两个对象的-hashCode-相同，则-equals-也一定为-true，对吗？" class="headerlink" title="两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？"></a>两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？</h2><p>错误，两个不相同的对象有可能会发生hash冲突。</p>
+<h2 id="final-在-java-中有什么作用？"><a href="#final-在-java-中有什么作用？" class="headerlink" title="final 在 java 中有什么作用？"></a>final 在 java 中有什么作用？</h2><ul>
+<li>final修饰的类叫最终类，该类不能被继承。</li>
+<li>final修饰的方法不能被重写。</li>
+<li>final修饰的变量叫常量，常量必须初始化，初始化之后值就不能再被更改了。</li>
+</ul>
+<h2 id="java-中的-Math-round-1-5-等于多少？"><a href="#java-中的-Math-round-1-5-等于多少？" class="headerlink" title="java 中的 Math.round(-1.5) 等于多少？"></a>java 中的 Math.round(-1.5) 等于多少？</h2><p>等于-1，该方法原理是原数+0.5再向下取整。</p>
+<h2 id="String-属于基础的数据类型吗？"><a href="#String-属于基础的数据类型吗？" class="headerlink" title="String 属于基础的数据类型吗？"></a>String 属于基础的数据类型吗？</h2><p>不属于，String属于引用类型，基础数据类型有8种：byte,short,int,long,char,boolean,float,double。</p>
+<h2 id="java-中操作字符串都有哪些类？它们之间有什么区别？"><a href="#java-中操作字符串都有哪些类？它们之间有什么区别？" class="headerlink" title="java 中操作字符串都有哪些类？它们之间有什么区别？"></a>java 中操作字符串都有哪些类？它们之间有什么区别？</h2><p>String,StringBuilder,StringBuffer。String声明的是不可变对象，其余两个可以在原有对象的基础上进行操作，所以经常对字符串进行操作的情况下最好不要使用String类型。</p>
+<p>StringBuilder和Stringbuffer的区别是前者线程不安全，且性能较高，后者线程安全，但性能较弱。</p>
+<h2 id="String-str-”i”与-String-str-new-String-“i”-一样吗？"><a href="#String-str-”i”与-String-str-new-String-“i”-一样吗？" class="headerlink" title="String str=”i”与 String str=new String(“i”)一样吗？"></a>String str=”i”与 String str=new String(“i”)一样吗？</h2><p>不一样，虚拟机会将前者分配到常量池中，而后者会被分配到堆内存中。</p>
+<h2 id="如何将字符串反转？"><a href="#如何将字符串反转？" class="headerlink" title="如何将字符串反转？"></a>如何将字符串反转？</h2><p>使用StringBuffer或StringBuilder中的reverse()方法。</p>
+<h2 id="String-类的常用方法都有哪些？"><a href="#String-类的常用方法都有哪些？" class="headerlink" title="String 类的常用方法都有哪些？"></a>String 类的常用方法都有哪些？</h2><ul>
+<li>indexof</li>
+<li>split</li>
+<li>replace</li>
+<li>chartAt</li>
+<li>length</li>
+<li>toLowerCase</li>
+<li>toUpperCase</li>
+<li>substring</li>
+<li>equals</li>
+<li>trim</li>
+<li>getBytes</li>
+</ul>
+<h2 id="抽象类必须要有抽象方法吗？"><a href="#抽象类必须要有抽象方法吗？" class="headerlink" title="抽象类必须要有抽象方法吗？"></a>抽象类必须要有抽象方法吗？</h2><p>不是必须的。</p>
+<h2 id="抽象类能使用-final-修饰吗？"><a href="#抽象类能使用-final-修饰吗？" class="headerlink" title="抽象类能使用 final 修饰吗？"></a>抽象类能使用 final 修饰吗？</h2><p>不能。抽象类本来就是要让其他类继承的，抽象类使用final修饰就代表了不能被继承，这与抽象类的设计理念产生矛盾。</p>
+<h2 id="接口和抽象类有什么区别？"><a href="#接口和抽象类有什么区别？" class="headerlink" title="接口和抽象类有什么区别？"></a>接口和抽象类有什么区别？</h2><p>…</p>
+<h2 id="java-中-IO-流分为几种？"><a href="#java-中-IO-流分为几种？" class="headerlink" title="java 中 IO 流分为几种？"></a>java 中 IO 流分为几种？</h2><ul>
+<li>按功能分：输入流、输出流。</li>
+<li>按类型分：字节流、字符流。</li>
+</ul>
+<h2 id="BIO、NIO、AIO-有什么区别？"><a href="#BIO、NIO、AIO-有什么区别？" class="headerlink" title="BIO、NIO、AIO 有什么区别？"></a>BIO、NIO、AIO 有什么区别？</h2><ul>
+<li>BIO: Block IO同步阻塞式IO。</li>
+<li>NIO：New IO同步非阻塞试IO，是BIO的升级，客户端和服务端通过Channel通讯，实现多路复用。</li>
+<li>AIO：Asynchronous IO是NIO的升级，也叫NIO2。实现了异步非阻塞IO，异步IO的操作是基于事件和回调机制。</li>
+</ul>
+<h2 id="Files的常用方法都有哪些？"><a href="#Files的常用方法都有哪些？" class="headerlink" title="Files的常用方法都有哪些？"></a>Files的常用方法都有哪些？</h2><ul>
+<li>exits</li>
+<li>createFile</li>
+<li>createDirectory</li>
+<li>delete</li>
+<li>copy</li>
+<li>move</li>
+<li>size</li>
+<li>read</li>
+<li>write</li>
+</ul>
+<h1 id="Java容器"><a href="#Java容器" class="headerlink" title="Java容器"></a>Java容器</h1><h2 id="java-容器都有哪些？"><a href="#java-容器都有哪些？" class="headerlink" title="java 容器都有哪些？"></a>java 容器都有哪些？</h2><ul>
+<li><p>List</p>
+<ol>
+<li>ArrayList</li>
+<li>LinkedList</li>
+<li>Vector</li>
+<li>CopyOnWriteArrayList</li>
+</ol>
+</li>
+<li><p>Queue</p>
+<ul>
+<li>非阻塞队列<ol>
+<li>LinkedList</li>
+<li>PriorityQueue</li>
+<li>ConcurrentLnkedQueue</li>
+</ol>
+</li>
+<li>阻塞队列<ol>
+<li>ArrayBlockingQueue</li>
+<li>LinkedBlockingQueue</li>
+<li>PriorityBlockingQueue</li>
+<li>DelayQueue</li>
+<li>SynchronousQueue</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>Map</p>
+<ol>
+<li>HashMap</li>
+<li>LinkedHashMap</li>
+<li>HashTable</li>
+<li>TreeMap</li>
+<li>ConCurrentHashMap</li>
+</ol>
+</li>
+<li><p>Set</p>
+<ol>
+<li>HashSet</li>
+<li>LinkedHashSet</li>
+<li>TreeSet</li>
+</ol>
+</li>
+</ul>
+<h2 id="Collection-和-Collections-有什么区别？"><a href="#Collection-和-Collections-有什么区别？" class="headerlink" title="Collection 和 Collections 有什么区别？"></a>Collection 和 Collections 有什么区别？</h2><p>Collection是集合的顶级接口，Collections是集合的一个工具类，提供了对集合进行排序、搜索以及线程安全操作等方法。</p>
+<h2 id="HashMap-和-Hashtable-有什么区别？"><a href="#HashMap-和-Hashtable-有什么区别？" class="headerlink" title="HashMap 和 Hashtable 有什么区别？"></a>HashMap 和 Hashtable 有什么区别？</h2><ol>
+<li>HashTable是线程安全的，但是效率比HashMap低。</li>
+<li>HashMap允许空键值，而HashTable不允许。</li>
+</ol>
+<h2 id="如何决定使用-HashMap-还是-TreeMap？"><a href="#如何决定使用-HashMap-还是-TreeMap？" class="headerlink" title="如何决定使用 HashMap 还是 TreeMap？"></a>如何决定使用 HashMap 还是 TreeMap？</h2><p>如果需要对一个有序的key集合进行排序操作，则选择TreeMap，否则选择HashMap。</p>
+<h2 id="说一下-HashMap-的实现原理？"><a href="#说一下-HashMap-的实现原理？" class="headerlink" title="说一下 HashMap 的实现原理？"></a>说一下 HashMap 的实现原理？</h2><p>HashMap实际上是一个数组和链表的结合体。当我们往HashMap中put元素时，它首先会根据key的hashcode计算hash值，然后根据hash值得到这个元素在数组中的位置。如果该位置没有元素，则直接将该元素放到数组的该位置上。如果该位置已经有了其他元素，这种情况就叫hash冲突，HashMap会将这个位置上的元素以链表的形式存放，jdk1.8中以尾插法的方式插入元素，如果链表中的元素超过8个，该链表会转为红黑树来提高查询效率。</p>
+<h2 id="说一下-HashSet-的实现原理？"><a href="#说一下-HashSet-的实现原理？" class="headerlink" title="说一下 HashSet 的实现原理？"></a>说一下 HashSet 的实现原理？</h2><p>HashSet的底层由HashMap实现，它的值存在HashMap的key上，HashMap的value统一为PRESENT。</p>
+<h2 id="ArrayList-和-LinkedList-的区别是什么？"><a href="#ArrayList-和-LinkedList-的区别是什么？" class="headerlink" title="ArrayList 和 LinkedList 的区别是什么？"></a>ArrayList 和 LinkedList 的区别是什么？</h2><p>ArrayList底层数据结构是数组，支持随机访问。LinkedList底层是双向循环链表。ArrayList查找元素时，时间复杂度为O(1),LinkedList为O(n)。</p>
+<h2 id="如何实现数组和-List-之间的转换？"><a href="#如何实现数组和-List-之间的转换？" class="headerlink" title="如何实现数组和 List 之间的转换？"></a>如何实现数组和 List 之间的转换？</h2><ul>
+<li>List转数组：调用List的toArray方法。</li>
+<li>数组转List：调用Arrays的asList方法。</li>
+</ul>
+<h2 id="ArrayList-和-Vector-的区别是什么？"><a href="#ArrayList-和-Vector-的区别是什么？" class="headerlink" title="ArrayList 和 Vector 的区别是什么？"></a>ArrayList 和 Vector 的区别是什么？</h2><p>Vector是线程安全的，ArrayList不是。一般使用ArrayList较多，而且它可以使用Collections工具类将其变为同步集合。</p>
+<h2 id="Array-和-ArrayList-有何区别？"><a href="#Array-和-ArrayList-有何区别？" class="headerlink" title="Array 和 ArrayList 有何区别？"></a>Array 和 ArrayList 有何区别？</h2><ol>
+<li>Array大小固定，ArrayList大小可变。</li>
+<li>Array中能容纳基本类型和对象，而ArrayList只能容纳对象。</li>
+<li>ArrayList提供更多方法。</li>
+</ol>
+<h2 id="在-Queue-中-poll-和-remove-有什么区别？"><a href="#在-Queue-中-poll-和-remove-有什么区别？" class="headerlink" title="在 Queue 中 poll()和 remove()有什么区别？"></a>在 Queue 中 poll()和 remove()有什么区别？</h2><p>两者都是从队列中取出一个元素，前者当获取元素失败时返回null，后者会抛出异常。</p>
+<h2 id="哪些集合类是线程安全的？"><a href="#哪些集合类是线程安全的？" class="headerlink" title="哪些集合类是线程安全的？"></a>哪些集合类是线程安全的？</h2><ol>
+<li>Vector/HashTable</li>
+<li>CopyOnWriteArrayList/ConcurrentHashMap</li>
+</ol>
+<h2 id="迭代器-Iterator-是什么？"><a href="#迭代器-Iterator-是什么？" class="headerlink" title="迭代器 Iterator 是什么？"></a>迭代器 Iterator 是什么？</h2><p>迭代器是一种设计模式，他是一个对象，它可以遍历并选择序列中的对象，而开发人员不需要了解该序列的底层结构。迭代器通常被称为“轻量级”对象，因为创建它的代价小。</p>
+<h2 id="Iterator-怎么使用？有什么特点？"><a href="#Iterator-怎么使用？有什么特点？" class="headerlink" title="Iterator 怎么使用？有什么特点？"></a>Iterator 怎么使用？有什么特点？</h2><p>Java中的Iterator功能比较简单，并且只能单向移动：</p>
+<p>(1) 使用方法iterator()要求容器返回一个Iterator。第一次调用Iterator的next()方法时，它返回序列的第一个元素。注意：iterator()方法是java.lang.Iterable接口,被Collection继承。</p>
+<p>(2) 使用next()获得序列中的下一个元素。</p>
+<p>(3) 使用hasNext()检查序列中是否还有元素。</p>
+<p>(4) 使用remove()将迭代器新返回的元素删除。　</p>
+<p>Iterator是Java迭代器最简单的实现，为List设计的ListIterator具有更多的功能，它可以从两个方向遍历List，也可以从List中插入和删除元素。</p>
+<h2 id="Iterator-和-ListIterator-有什么区别？"><a href="#Iterator-和-ListIterator-有什么区别？" class="headerlink" title="Iterator 和 ListIterator 有什么区别？"></a>Iterator 和 ListIterator 有什么区别？</h2><ul>
+<li><p>Iterator可用来遍历Set和List集合，但是ListIterator只能用来遍历List。 </p>
+</li>
+<li><p>Iterator对集合只能是前向遍历，ListIterator既可以前向也可以后向。 </p>
+</li>
+<li><p>ListIterator实现了Iterator接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等。</p>
+</li>
+</ul>
+<h2 id="怎么确保一个集合不能被修改？"><a href="#怎么确保一个集合不能被修改？" class="headerlink" title="怎么确保一个集合不能被修改？"></a>怎么确保一个集合不能被修改？</h2><p>使用Collectioins类的unmodifiableCollection方法。</p>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h2 id="并行和并发有什么区别？"><a href="#并行和并发有什么区别？" class="headerlink" title="并行和并发有什么区别？"></a>并行和并发有什么区别？</h2><ul>
+<li>并行指两个或多个事件在同一时刻发生。</li>
+<li>并发指两个或多个事件在同一时间间隔内发生。</li>
+</ul>
+<h2 id="线程和进程的区别？"><a href="#线程和进程的区别？" class="headerlink" title="线程和进程的区别？"></a>线程和进程的区别？</h2><ul>
+<li>进程：是执行中的一段程序，一旦程序被载入内存中请准备执行，他就是一个进程。</li>
+<li>线程：单个进程中执行的任务就是一个线程，线程是进程中执行运算的最小单位。</li>
+<li>一个程序至少有一个进程，一个进程至少有一个线程。进程在运行过程中有独立的内存单元，而多线程共享内存，极大提高了程序的执行效率。</li>
+</ul>
+<h2 id="守护线程是什么？"><a href="#守护线程是什么？" class="headerlink" title="守护线程是什么？"></a>守护线程是什么？</h2><p>守护线程是为了服务于主线程，当主线程消亡，它也会被销毁。</p>
+<h2 id="创建线程有哪几种方式？"><a href="#创建线程有哪几种方式？" class="headerlink" title="创建线程有哪几种方式？"></a>创建线程有哪几种方式？</h2><ol>
+<li>继承Thread类</li>
+<li>实现Runable接口</li>
+<li>实现Callable接口</li>
+</ol>
+<h2 id="说一下-runnable-和-callable-有什么区别？"><a href="#说一下-runnable-和-callable-有什么区别？" class="headerlink" title="说一下 runnable 和 callable 有什么区别？"></a>说一下 runnable 和 callable 有什么区别？</h2><ul>
+<li>Runcable接口中run方法的返回值是void</li>
+<li>Callable接口中run方法的返回值为泛型。通过与Future、FutureTask配合可以获取异步执行结果。</li>
+</ul>
+<h2 id="线程有哪些状态？"><a href="#线程有哪些状态？" class="headerlink" title="线程有哪些状态？"></a>线程有哪些状态？</h2><ol>
+<li>创建状态：生成线程对象，还没有调用start方法。</li>
+<li>就绪状态：调用线程对象的start方法后进入就绪状态。线程阻塞结束之后也会进入就绪状态。</li>
+<li>运行状态：当线程获取到CPU时间片之后，进入运行状态。</li>
+<li>阻塞状态：调用sleep/join方法时进入阻塞状态。</li>
+<li>死亡状态：run方法执行结束或异常退出。</li>
+</ol>
+<h2 id="sleep-和-wait-有什么区别？"><a href="#sleep-和-wait-有什么区别？" class="headerlink" title="sleep() 和 wait() 有什么区别？"></a>sleep() 和 wait() 有什么区别？</h2><p>调用sleep方法会使线程进入休眠状态，休眠结束之后，会进入就绪状态。需要注意点事sleep方法不会释放锁。<br>wait方法是Object类中的方法，当调用该方法后，该线程就会进入该对象相关的等待池，同时会释放所持有的锁，可以通过notify/notifyAll方法来唤醒等待的线程。</p>
+<h2 id="notify-和-notifyAll-有什么区别？"><a href="#notify-和-notifyAll-有什么区别？" class="headerlink" title="notify()和 notifyAll()有什么区别？"></a>notify()和 notifyAll()有什么区别？</h2><p>notify方法随机唤醒一个等待池中的线程，而notifyAll会将所有等待池中等的线程一起唤醒。</p>
+<h2 id="线程的-run-和-start-有什么区别？"><a href="#线程的-run-和-start-有什么区别？" class="headerlink" title="线程的 run()和 start()有什么区别？"></a>线程的 run()和 start()有什么区别？</h2><p>start方法是多线程的启动方法，直接调用run方法就等于直接调用了一个普通的函数。</p>
+<h2 id="创建线程池有哪几种方式？"><a href="#创建线程池有哪几种方式？" class="headerlink" title="创建线程池有哪几种方式？"></a>创建线程池有哪几种方式？</h2><ol>
+<li>newFixedThreadPool<br> 这是一个长度固定的线程池。</li>
+<li>newCachedThreadPool<br> 可缓存的线程池。</li>
+<li>newSingleThreadExecutor<br> 单线池。</li>
+<li>newScheduledThreadPoll<br> 长度固定的线程池，并且以延迟或者定时的方式来执行任务，类似于Timer。</li>
+</ol>
+<h2 id="线程池都有哪些状态？"><a href="#线程池都有哪些状态？" class="headerlink" title="线程池都有哪些状态？"></a>线程池都有哪些状态？</h2><p>…</p>
+<h2 id="线程池中-submit-和-execute-方法有什么区别？"><a href="#线程池中-submit-和-execute-方法有什么区别？" class="headerlink" title="线程池中 submit()和 execute()方法有什么区别？"></a>线程池中 submit()和 execute()方法有什么区别？</h2><ol>
+<li>接受参数不一样。</li>
+<li>suubmit有返回值，execute没有。</li>
+<li>submit方便Exception处理。</li>
+</ol>
+<h2 id="在-java-程序中怎么保证多线程的运行安全？"><a href="#在-java-程序中怎么保证多线程的运行安全？" class="headerlink" title="在 java 程序中怎么保证多线程的运行安全？"></a>在 java 程序中怎么保证多线程的运行安全？</h2><p>线程安全在三个方面体现：</p>
+<ul>
+<li><p>原子性：提供互斥访问，同一时刻只能有一个线程对数据进行操作，（atomic,synchronized）；</p>
+</li>
+<li><p>可见性：一个线程对主内存的修改可以及时地被其他线程看到，（synchronized,volatile）；</p>
+</li>
+<li><p>有序性：一个线程观察其他线程中的指令执行顺序，由于指令重排序，该观察结果一般杂乱无序，（happens-before原则）。</p>
+</li>
+</ul>
+<h2 id="多线程锁的升级原理是什么？"><a href="#多线程锁的升级原理是什么？" class="headerlink" title="多线程锁的升级原理是什么？"></a>多线程锁的升级原理是什么？</h2><p>…</p>
+<h2 id="什么是死锁？"><a href="#什么是死锁？" class="headerlink" title="什么是死锁？"></a>什么是死锁？</h2><p>指两个或两个以上的线程互相持有对方所需要的锁，导致这些线程一直处于等待状态，无法向下执行。</p>
+<h2 id="怎么防止死锁？"><a href="#怎么防止死锁？" class="headerlink" title="怎么防止死锁？"></a>怎么防止死锁？</h2><p>死锁的四个必要条件：</p>
+<pre><code>* 互斥条件：进程对所分配到的资源不允许其他进程进行访问，若其他进程访问该资源，只能等待，直至占有该资源的进程使用完成后释放该资源
+
+* 请求和保持条件：进程获得一定的资源之后，又对其他资源发出请求，但是该资源可能被其他进程占有，此事请求阻塞，但又对自己获得的资源保持不放
+
+* 不可剥夺条件：是指进程已获得的资源，在未完成使用之前，不可被剥夺，只能在使用完后自己释放
+
+* 环路等待条件：是指进程发生死锁后，若干进程之间形成一种头尾相接的循环等待资源关系</code></pre>
+<p>这四个条件是死锁的必要条件，只要系统发生死锁，这些条件必然成立，而只要上述条件之 一不满足，就不会发生死锁。</p>
+<p>理解了死锁的原因，尤其是产生死锁的四个必要条件，就可以最大可能地避免、预防和 解除死锁。<br>避免死锁的方式：<br>    * 加锁顺序（线程按照一定的顺序加锁）<br>    * 加锁时限（线程尝试获取锁的时候加上一定的时限，超过时限则放弃对该锁的请求，并释放自己占有的锁）<br>    * 死锁检测</p>
+<h2 id="ThreadLocal-是什么？有哪些使用场景？"><a href="#ThreadLocal-是什么？有哪些使用场景？" class="headerlink" title="ThreadLocal 是什么？有哪些使用场景？"></a>ThreadLocal 是什么？有哪些使用场景？</h2><p>ThreadLocal是维护线程内变量的类，该变量只能在当前线程访问，相对于其他线程是隔离的。例如可将JDBC的连接对象Connection放入ThreadLocal中。</p>
+<h2 id="说一下-synchronized-底层实现原理？"><a href="#说一下-synchronized-底层实现原理？" class="headerlink" title="说一下 synchronized 底层实现原理？"></a>说一下 synchronized 底层实现原理？</h2><ul>
+<li>普通同步方法：锁是当前对象。</li>
+<li>静态同步方法：锁是当前类。</li>
+<li>同步方法快：锁是括号中的对象。</li>
+</ul>
+<h2 id="synchronized-和-volatile-的区别是什么？"><a href="#synchronized-和-volatile-的区别是什么？" class="headerlink" title="synchronized 和 volatile 的区别是什么？"></a>synchronized 和 volatile 的区别是什么？</h2><ul>
+<li><p>volatile本质是告诉jvm当前变量在寄存器（工作内存）中的值是不确定的，需要从主存中读取；synchronize这是锁定当前变量，只有当前线程可以访问改变量。</p>
+</li>
+<li><p>volatile仅能使用在变量级别；synchronized则可以使用在变量、方法、和类级别的。</p>
+</li>
+<li><p>volatile仅能实现变量的修改可见性，不能保证原子性；而synchronized则可以保证变量的修改可见性和原子性。</p>
+</li>
+<li><p>volatile不会造成线程的阻塞；synchronized可能会造成线程的阻塞。</p>
+</li>
+<li><p>volatile标记的变量不会被编译器优化；synchronized标记的变量可以被编译器优化。</p>
+</li>
+</ul>
+<h2 id="synchronized-和-Lock-有什么区别？"><a href="#synchronized-和-Lock-有什么区别？" class="headerlink" title="synchronized 和 Lock 有什么区别？"></a>synchronized 和 Lock 有什么区别？</h2><p>首先synchronized是java内置关键字，在jvm层面，Lock是个java类；</p>
+<p>synchronized无法判断是否获取锁的状态，Lock可以判断是否获取到锁；</p>
+<p>synchronized会自动释放锁(a 线程执行完同步代码会释放锁 ；b 线程执行过程中发生异常会释放锁)，Lock需在finally中手工释放锁（unlock()方法释放锁），否则容易造成线程死锁；</p>
+<p>用synchronized关键字的两个线程1和线程2，如果当前线程1获得锁，线程2线程等待。如果线程1阻塞，线程2则会一直等待下去，而Lock锁就不一定会等待下去，如果尝试获取不到锁，线程可以不用一直等待就结束了；</p>
+<p>synchronized的锁可重入、不可中断、非公平，而Lock锁可重入、可判断、可公平（两者皆可）；</p>
+<p>Lock锁适合大量同步的代码的同步问题，synchronized锁适合代码少量的同步问题。</p>
+<h2 id="synchronized-和-ReentrantLock-区别是什么？"><a href="#synchronized-和-ReentrantLock-区别是什么？" class="headerlink" title="synchronized 和 ReentrantLock 区别是什么？"></a>synchronized 和 ReentrantLock 区别是什么？</h2><p>synchronized是和if、else、for、while一样的关键字，ReentrantLock是类，这是二者的本质区别。既然ReentrantLock是类，那么它就提供了比synchronized更多更灵活的特性，可以被继承、可以有方法、可以有各种各样的类变量，ReentrantLock比synchronized的扩展性体现在几点上： </p>
+<p>ReentrantLock可以对获取锁的等待时间进行设置，这样就避免了死锁 </p>
+<p>ReentrantLock可以获取各种锁的信息</p>
+<p>ReentrantLock可以灵活地实现多路通知 </p>
+<p>另外，二者的锁机制其实也是不一样的:ReentrantLock底层调用的是Unsafe的park方法加锁，synchronized操作的应该是对象头中mark word。</p>
+<h2 id="说一下-atomic-的原理？"><a href="#说一下-atomic-的原理？" class="headerlink" title="说一下 atomic 的原理？"></a>说一下 atomic 的原理？</h2><p>JDK Atomic开头的类，是通过 CAS 原理解决并发情况下原子性问题。</p>
+<p>CAS 包含 3 个参数，CAS(V, E, N)。V 表示需要更新的变量，E 表示变量当前期望值，N 表示更新为的值。只有当变量 V 的值等于 E 时，变量 V 的值才会被更新为 N。如果变量 V 的值不等于 E ，说明变量 V 的值已经被更新过，当前线程什么也不做，返回更新失败。</p>
+<p>当多个线程同时使用 CAS 更新一个变量时，只有一个线程可以更新成功，其他都失败。失败的线程不会被挂起，可以继续重试 CAS，也可以放弃操作。</p>
+<p>CAS 操作的原子性是通过 CPU 单条指令完成而保障的。JDK 中是通过 Unsafe 类中的 API 完成的。</p>
+<p>在并发量很高的情况，会有大量 CAS 更新失败，所以需要慎用。</p>
+<p>参考博文：<a target="_blank" rel="noopener" href="https://blog.csdn.net/fangchao2011/article/details/89203535">最新Java面试题，常见面试题及答案汇总</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/resource-collection/" rel="prev" title="资源整理">
+      <i class="fa fa-chevron-left"></i> 资源整理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9C-%E2%80%9D%E5%92%8Cequals%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">“&#x3D;&#x3D;”和equals有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84-hashCode-%E7%9B%B8%E5%90%8C%EF%BC%8C%E5%88%99-equals-%E4%B9%9F%E4%B8%80%E5%AE%9A%E4%B8%BA-true%EF%BC%8C%E5%AF%B9%E5%90%97%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final-%E5%9C%A8-java-%E4%B8%AD%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">final 在 java 中有什么作用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-%E4%B8%AD%E7%9A%84-Math-round-1-5-%E7%AD%89%E4%BA%8E%E5%A4%9A%E5%B0%91%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">java 中的 Math.round(-1.5) 等于多少？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-%E5%B1%9E%E4%BA%8E%E5%9F%BA%E7%A1%80%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%90%97%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">String 属于基础的数据类型吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-%E4%B8%AD%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E7%B1%BB%EF%BC%9F%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.6.</span> <span class="nav-text">java 中操作字符串都有哪些类？它们之间有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-str-%E2%80%9Di%E2%80%9D%E4%B8%8E-String-str-new-String-%E2%80%9Ci%E2%80%9D-%E4%B8%80%E6%A0%B7%E5%90%97%EF%BC%9F"><span class="nav-number">1.7.</span> <span class="nav-text">String str&#x3D;”i”与 String str&#x3D;new String(“i”)一样吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%8D%E8%BD%AC%EF%BC%9F"><span class="nav-number">1.8.</span> <span class="nav-text">如何将字符串反转？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-%E7%B1%BB%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.9.</span> <span class="nav-text">String 类的常用方法都有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%BF%85%E9%A1%BB%E8%A6%81%E6%9C%89%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%E5%90%97%EF%BC%9F"><span class="nav-number">1.10.</span> <span class="nav-text">抽象类必须要有抽象方法吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%E8%83%BD%E4%BD%BF%E7%94%A8-final-%E4%BF%AE%E9%A5%B0%E5%90%97%EF%BC%9F"><span class="nav-number">1.11.</span> <span class="nav-text">抽象类能使用 final 修饰吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.12.</span> <span class="nav-text">接口和抽象类有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java-%E4%B8%AD-IO-%E6%B5%81%E5%88%86%E4%B8%BA%E5%87%A0%E7%A7%8D%EF%BC%9F"><span class="nav-number">1.13.</span> <span class="nav-text">java 中 IO 流分为几种？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BIO%E3%80%81NIO%E3%80%81AIO-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.14.</span> <span class="nav-text">BIO、NIO、AIO 有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Files%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.15.</span> <span class="nav-text">Files的常用方法都有哪些？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E5%AE%B9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">Java容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java-%E5%AE%B9%E5%99%A8%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">java 容器都有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection-%E5%92%8C-Collections-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">Collection 和 Collections 有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-%E5%92%8C-Hashtable-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">HashMap 和 Hashtable 有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%86%B3%E5%AE%9A%E4%BD%BF%E7%94%A8-HashMap-%E8%BF%98%E6%98%AF-TreeMap%EF%BC%9F"><span class="nav-number">2.4.</span> <span class="nav-text">如何决定使用 HashMap 还是 TreeMap？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B-HashMap-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">2.5.</span> <span class="nav-text">说一下 HashMap 的实现原理？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B-HashSet-%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">2.6.</span> <span class="nav-text">说一下 HashSet 的实现原理？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList-%E5%92%8C-LinkedList-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.7.</span> <span class="nav-text">ArrayList 和 LinkedList 的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E7%BB%84%E5%92%8C-List-%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2%EF%BC%9F"><span class="nav-number">2.8.</span> <span class="nav-text">如何实现数组和 List 之间的转换？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList-%E5%92%8C-Vector-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.9.</span> <span class="nav-text">ArrayList 和 Vector 的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array-%E5%92%8C-ArrayList-%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.10.</span> <span class="nav-text">Array 和 ArrayList 有何区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-Queue-%E4%B8%AD-poll-%E5%92%8C-remove-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.11.</span> <span class="nav-text">在 Queue 中 poll()和 remove()有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E9%9B%86%E5%90%88%E7%B1%BB%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%EF%BC%9F"><span class="nav-number">2.12.</span> <span class="nav-text">哪些集合类是线程安全的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8-Iterator-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.13.</span> <span class="nav-text">迭代器 Iterator 是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterator-%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="nav-number">2.14.</span> <span class="nav-text">Iterator 怎么使用？有什么特点？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterator-%E5%92%8C-ListIterator-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.15.</span> <span class="nav-text">Iterator 和 ListIterator 有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E7%A1%AE%E4%BF%9D%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88%E4%B8%8D%E8%83%BD%E8%A2%AB%E4%BF%AE%E6%94%B9%EF%BC%9F"><span class="nav-number">2.16.</span> <span class="nav-text">怎么确保一个集合不能被修改？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%92%8C%E5%B9%B6%E5%8F%91%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">并行和并发有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">线程和进程的区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">守护线程是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">3.4.</span> <span class="nav-text">创建线程有哪几种方式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B-runnable-%E5%92%8C-callable-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.5.</span> <span class="nav-text">说一下 runnable 和 callable 有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%9C%89%E5%93%AA%E4%BA%9B%E7%8A%B6%E6%80%81%EF%BC%9F"><span class="nav-number">3.6.</span> <span class="nav-text">线程有哪些状态？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep-%E5%92%8C-wait-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.7.</span> <span class="nav-text">sleep() 和 wait() 有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#notify-%E5%92%8C-notifyAll-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.8.</span> <span class="nav-text">notify()和 notifyAll()有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84-run-%E5%92%8C-start-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.9.</span> <span class="nav-text">线程的 run()和 start()有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">3.10.</span> <span class="nav-text">创建线程池有哪几种方式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E7%8A%B6%E6%80%81%EF%BC%9F"><span class="nav-number">3.11.</span> <span class="nav-text">线程池都有哪些状态？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%AD-submit-%E5%92%8C-execute-%E6%96%B9%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.12.</span> <span class="nav-text">线程池中 submit()和 execute()方法有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-java-%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E8%BF%90%E8%A1%8C%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="nav-number">3.13.</span> <span class="nav-text">在 java 程序中怎么保证多线程的运行安全？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%94%81%E7%9A%84%E5%8D%87%E7%BA%A7%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.14.</span> <span class="nav-text">多线程锁的升级原理是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%AD%BB%E9%94%81%EF%BC%9F"><span class="nav-number">3.15.</span> <span class="nav-text">什么是死锁？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E9%98%B2%E6%AD%A2%E6%AD%BB%E9%94%81%EF%BC%9F"><span class="nav-number">3.16.</span> <span class="nav-text">怎么防止死锁？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="nav-number">3.17.</span> <span class="nav-text">ThreadLocal 是什么？有哪些使用场景？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B-synchronized-%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">3.18.</span> <span class="nav-text">说一下 synchronized 底层实现原理？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized-%E5%92%8C-volatile-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.19.</span> <span class="nav-text">synchronized 和 volatile 的区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized-%E5%92%8C-Lock-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.20.</span> <span class="nav-text">synchronized 和 Lock 有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized-%E5%92%8C-ReentrantLock-%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.21.</span> <span class="nav-text">synchronized 和 ReentrantLock 区别是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E4%B8%80%E4%B8%8B-atomic-%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">3.22.</span> <span class="nav-text">说一下 atomic 的原理？</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iahc</p>
+  <div class="site-description" itemprop="description">Iahc's Blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iahc</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
