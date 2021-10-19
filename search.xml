@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>linux笔记</title>
+    <url>/linux-note/</url>
+    <content><![CDATA[<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><h3 id="apt软件卸载"><a href="#apt软件卸载" class="headerlink" title="apt软件卸载"></a>apt软件卸载</h3><pre><code>apt-get purge / apt-get –purge remove </code></pre>
+<p>删除已安装包（不保留配置文件)。<br>如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件</p>
+<pre><code>apt-get autoremove </code></pre>
+<p>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。</p>
+<pre><code>apt-get remove </code></pre>
+<p>删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。</p>
+<pre><code>apt-get autoclean </code></pre>
+<p>APT的底层包是dpkg, 而dpkg 安装Package时, 会将 *.deb 放在 /var/cache/apt/archives/中，apt-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。</p>
+<pre><code>apt-get clean </code></pre>
+<p>使用 apt-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/*.deb。</p>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h3><pre><code>set number 
+set ts=4
+set expandtab
+set autoindent
+set softtabstop=4 
+set shiftwidth=4</code></pre>
+<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="多行编辑"><a href="#多行编辑" class="headerlink" title="多行编辑"></a>多行编辑</h4><ol>
+<li>在命令行模式按Ctrl+V进入块模式</li>
+<li>利用上下左右键选择需要编辑多少行、从哪开始</li>
+<li>输入大写字母“I”进入插入模式</li>
+<li>编辑行</li>
+<li>再次按Esc键回到命令行模式即可完成多行编辑</li>
+</ol>
+<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>全局替换a为b<br>    :%s/a/b/g</p>
+<h2 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h2><p>杀死包含某关键字的所以进程<br>    ps -ef | grep param | grep -v grep | cut -c 9-15 | xargs kill -9<br>    或<br>    ps x | grep param | grep -v grep | awk ‘{print $1}’ | xargs kill -9</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux apt vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown语法</title>
+    <url>/markdown/</url>
+    <content><![CDATA[<h1 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，其编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档，编写的文档后缀为 .md, .markdown。</p>
+<h2 id="Markdown块级元素"><a href="#Markdown块级元素" class="headerlink" title="Markdown块级元素"></a>Markdown块级元素</h2><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><h4 id="Setext样式"><a href="#Setext样式" class="headerlink" title="Setext样式"></a>Setext样式</h4><p>在标题底下使用<code>=</code>和<code>-</code>分别表示一级标题和二级标题</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">一级标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">二级标题</span><br><span class="line">-------------</span><br></pre></td></tr></table></figure>
+
+<h4 id="Atx样式"><a href="#Atx样式" class="headerlink" title="Atx样式"></a>Atx样式</h4><p>每行开头使用1-6个<code>#</code>号来表示1-6级标题。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">依次类推...</span><br></pre></td></tr></table></figure>
+
+<h3 id="块引用"><a href="#块引用" class="headerlink" title="块引用"></a>块引用</h3><p>使用<code>&gt;</code>字符作为块引用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; Helloaaaaaaaaaaaaaaaaa</span><br><span class="line">&gt; aaaaaa</span><br><span class="line">&gt; aaaaaaaaaaaa</span><br><span class="line">&gt; aaaaaaaaaaaa</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Markdown</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>资源整理</title>
+    <url>/resource-collection/</url>
+    <content><![CDATA[<p><a href="https://cdn.jsdelivr.net/gh/iahccc/PicBed/Java3y/">java3y教程</a><br><a href="https://github.com/apache/rocketmq/blob/master/docs/cn/">Apache RocketMQ开发者指南</a></p>
+]]></content>
+      <tags>
+        <tag>resource</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java笔记</title>
     <url>/java-note/</url>
     <content><![CDATA[<h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="“-”和equals有什么区别？"><a href="#“-”和equals有什么区别？" class="headerlink" title="“==”和equals有什么区别？"></a>“==”和equals有什么区别？</h2><ol>
@@ -244,63 +310,6 @@
       </tags>
   </entry>
   <entry>
-    <title>linux笔记</title>
-    <url>/linux-note/</url>
-    <content><![CDATA[<h2 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h2><h3 id="apt软件卸载"><a href="#apt软件卸载" class="headerlink" title="apt软件卸载"></a>apt软件卸载</h3><pre><code>apt-get purge / apt-get –purge remove </code></pre>
-<p>删除已安装包（不保留配置文件)。<br>如软件包a，依赖软件包b，则执行该命令会删除a，而且不保留配置文件</p>
-<pre><code>apt-get autoremove </code></pre>
-<p>删除为了满足依赖而安装的，但现在不再需要的软件包（包括已安装包），保留配置文件。</p>
-<pre><code>apt-get remove </code></pre>
-<p>删除已安装的软件包（保留配置文件），不会删除依赖软件包，且保留配置文件。</p>
-<pre><code>apt-get autoclean </code></pre>
-<p>APT的底层包是dpkg, 而dpkg 安装Package时, 会将 *.deb 放在 /var/cache/apt/archives/中，apt-get autoclean 只会删除 /var/cache/apt/archives/ 已经过期的deb。</p>
-<pre><code>apt-get clean </code></pre>
-<p>使用 apt-get clean 会将 /var/cache/apt/archives/ 的 所有 deb 删掉，可以理解为 rm /var/cache/apt/archives/*.deb。</p>
-<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><h3 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h3><pre><code>set number 
-set ts=4
-set expandtab
-set autoindent
-set softtabstop=4 
-set shiftwidth=4</code></pre>
-<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><h4 id="多行编辑"><a href="#多行编辑" class="headerlink" title="多行编辑"></a>多行编辑</h4><ol>
-<li>在命令行模式按Ctrl+V进入块模式</li>
-<li>利用上下左右键选择需要编辑多少行、从哪开始</li>
-<li>输入大写字母“I”进入插入模式</li>
-<li>编辑行</li>
-<li>再次按Esc键回到命令行模式即可完成多行编辑</li>
-</ol>
-<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><p>全局替换a为b<br>    :%s/a/b/g</p>
-<h2 id="常用操作命令"><a href="#常用操作命令" class="headerlink" title="常用操作命令"></a>常用操作命令</h2><p>杀死包含某关键字的所以进程<br>    ps -ef | grep param | grep -v grep | cut -c 9-15 | xargs kill -9<br>    或<br>    ps x | grep param | grep -v grep | awk ‘{print $1}’ | xargs kill -9</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux apt vim</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Markdown语法</title>
-    <url>/markdown/</url>
-    <content><![CDATA[<h1 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，其编写的文档可以导出 HTML 、Word、图像、PDF、Epub 等多种格式的文档，编写的文档后缀为 .md, .markdown。</p>
-<h2 id="Markdown块级元素"><a href="#Markdown块级元素" class="headerlink" title="Markdown块级元素"></a>Markdown块级元素</h2><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><h4 id="Setext样式"><a href="#Setext样式" class="headerlink" title="Setext样式"></a>Setext样式</h4><p>在标题底下使用<code>=</code>和<code>-</code>分别表示一级标题和二级标题</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">一级标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">二级标题</span><br><span class="line">-------------</span><br></pre></td></tr></table></figure>
-
-<h4 id="Atx样式"><a href="#Atx样式" class="headerlink" title="Atx样式"></a>Atx样式</h4><p>每行开头使用1-6个<code>#</code>号来表示1-6级标题。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">依次类推...</span><br></pre></td></tr></table></figure>
-
-<h3 id="块引用"><a href="#块引用" class="headerlink" title="块引用"></a>块引用</h3><p>使用<code>&gt;</code>字符作为块引用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; Helloaaaaaaaaaaaaaaaaa</span><br><span class="line">&gt; aaaaaa</span><br><span class="line">&gt; aaaaaaaaaaaa</span><br><span class="line">&gt; aaaaaaaaaaaa</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Markdown</category>
-      </categories>
-      <tags>
-        <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis笔记</title>
     <url>/redis-note/</url>
     <content><![CDATA[<h1 id="Redis编译安装"><a href="#Redis编译安装" class="headerlink" title="Redis编译安装"></a>Redis编译安装</h1><h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><pre><code>wget *redis安装包url*  
@@ -397,15 +406,6 @@ redis-cli -p 27002 shutdown</code></pre>
       </categories>
       <tags>
         <tag>redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>资源整理</title>
-    <url>/resource-collection/</url>
-    <content><![CDATA[<p><a href="https://cdn.jsdelivr.net/gh/iahccc/PicBed/Java3y/">java3y教程</a><br><a href="https://github.com/apache/rocketmq/blob/master/docs/cn/">Apache RocketMQ开发者指南</a></p>
-]]></content>
-      <tags>
-        <tag>resource</tag>
       </tags>
   </entry>
 </search>
